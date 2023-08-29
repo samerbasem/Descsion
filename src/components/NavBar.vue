@@ -2,13 +2,13 @@
   
   <div>
     <v-app-bar
-      color="deep-purple accent-4"
+      color="light-blue accent-4"
       
       dark
     >
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
-      <v-toolbar-title>Page title</v-toolbar-title>
+      <v-toolbar-title>برنامج قرارات مجلس الوزراء</v-toolbar-title>
 
       <v-spacer></v-spacer>
 
