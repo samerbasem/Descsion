@@ -38,6 +38,13 @@ export default {
   name: 'HomeView',
   components: {
     NavBar
+  },
+ 
+  mounted(){
+
+    this.$vuetify.rtl=true;
   }
+
+
 }
 </script>

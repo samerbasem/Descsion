@@ -7,6 +7,7 @@
     :headers="headers"
     :items="item"
     :req="req"
+
     :loading="loading"
     loading-text="انتظر كثيرا"
     sort-by="id"
@@ -36,7 +37,7 @@
                     ><v-select :items="bookType" 
                       label=" نوع الكتاب "
                      item-text="book_Type_Name"
-                     item-value="id"
+                     item-value="Book_TypeId"
                      v-model="editedItem.id"
                       solo
                     ></v-select
@@ -55,10 +56,21 @@
                     <v-text-field
                       v-model="editedItem.book_Date"
                       label="تاريخ الكتاب "
+                      type="date"
                     ></v-text-field>
                   </v-col>
                 </v-row>
-              
+                <v-row class="ma-2">
+                  <v-col sm="6">
+                  <v-select
+                  v-model="selected"
+    :items="org"
+    label="اختر الدائرة او القسم لطفا "
+    item-text="orG_NM"
+    item-value="orG_NO">
+  </v-select>
+                  </v-col>
+                </v-row>
                 <v-row>
                   <v-col cols="12" sm="6" md="4">
                     <v-text-field
@@ -133,9 +145,11 @@
 import axios from "axios";
 export default {
   name: "advance",
+ 
   data() {
 
     return {
+      selected:null,
       loading: true,
       item: [],
       dialogDelete: false,
@@ -153,7 +167,7 @@ export default {
         { text: "تاريخ الكتاب", value: "book_Date" },
         { text: "موضوع لاجراءا", value: "process_Subj" },
         { text: "تفاصيل لاجراءا", value: "process_Details" },
-       
+        { text: " الدائرة", value: "org.OrgId" },
         { text: "تعديل", value: "edit" },
         { text: "حذف", value: "dlt" },
       ],
@@ -163,18 +177,25 @@ export default {
         book_No: "",
         book_Date:"",
         process_Subj: "",
-        process_Details:""
+        process_Details:"",
+        book_Type_Name:"",
+        OrgId:""
         
       },
       defaultItem: {
-       
+        Book_TypeId:"",
         book_No: "",
-        book_Date:""
+        book_Date:"",
+        process_Subj: "",
+        process_Details:"",
+        book_Type_Name:"",
+        OrgId:""
       },
-      bookType:[
-        book_Type_Name,
+      bookType:[],
+    
+     org:[]
       
-      ]
+    
     };
   },
   computed: {
@@ -186,7 +207,7 @@ export default {
     },
 
     formTitle() {
-      return this.editedIndex === -1 ? "ادخال سلفة جديدة" : "تعديل سلفة جديدة";
+      return this.editedIndex === -1 ? "ادخال اجراء جديد" : "تعديل اجراء  جديد";
     },
   },
   watch: {
@@ -245,18 +266,19 @@ export default {
         this.update();
       } else {   
 
-        await axios.post("https://localhost:44379/api/app/advance", this.editedItem)
+        await axios.post("https://localhost:7001/Decision_Processes", this.editedItem)
 
       
         this.getdata();
         this.dialog = false;
         this.loading = false;
+        
       }
     },
     async update() {
       this.loading = true;
 
-      await axios.put( "https://localhost:44379/api/app/advance/" +this.editedIndex, this.editedItem
+      await axios.put( "https://localhost:7001/Decision_Processes/" +this.editedIndex, this.editedItem
         )
         .then(function (response) {
           console.log(response);
@@ -282,13 +304,17 @@ export default {
         getgdata(){axios
         .get('https://localhost:7001/BookTypes')
         .then((response) => {
-          this.bookType=response.data.items;
+          this.bookType=response.data;
         });
         },  
+       
     },
   
 
+mounted(){
+  this.getgdata()
 
+},
 
   created() {
    this.getdata()

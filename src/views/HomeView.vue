@@ -109,8 +109,8 @@ mounted() {
   methods: {
     fetchData() {
      axios.get('https://localhost:7001/Decisions')
-      .then((resuit)=>{
-       this.data=resuit.data
+      .then((result)=>{
+       this.data=result.data
        this.loading=false
       })
        
