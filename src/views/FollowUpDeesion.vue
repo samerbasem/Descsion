@@ -1,18 +1,29 @@
 <template>
   <div>
+    <v-card
+    class="mx-auto"
+    max-width="1200"
+    style="margin-top: 300px;"
+    elevation="24"
+    value="rounded-xl"
+    
+  >
+    <v-img src="@/assets/img106.jpg" height="300px" cover></v-img>
+    <br />
+    </v-card>
   <v-row>
 
 <v-col cols="6">
   <v-data-table
     :headers="headers"
     :items="item"
-    :req="req"
+    
 
     :loading="loading"
     loading-text="انتظر كثيرا"
     sort-by="id"
-    :items-per-page="10"
-    class="elevation-3"
+    :items-per-page="20"
+    class="elevation-5"
   >
     <template v-slot:top>
       <v-toolbar flat>
@@ -37,7 +48,7 @@
                     ><v-select :items="bookType" 
                       label=" نوع الكتاب "
                      item-text="book_Type_Name"
-                     item-value="Book_TypeId"
+                     item-value="id"
                      v-model="editedItem.id"
                       solo
                     ></v-select
@@ -60,17 +71,61 @@
                     ></v-text-field>
                   </v-col>
                 </v-row>
+                <v-row>
+                  <v-col cols="12" sm="6" md="4">
+                    <v-text-field
+                      v-model="editedItem.Send_Reciev_Date"
+                      label="تاريخ الارسال "
+                      type="date"
+                    ></v-text-field>
+                  </v-col>
+                </v-row>
                 <v-row class="ma-2">
                   <v-col sm="6">
                   <v-select
-                  v-model="selected"
+                  v-model="editedItem.OrgId"
     :items="org"
     label="اختر الدائرة او القسم لطفا "
-    item-text="orG_NM"
-    item-value="orG_NO">
+    item-text="org_Name"
+    item-value=""
+    
+  >
   </v-select>
                   </v-col>
+
+                  Process_Path
                 </v-row>
+                <v-row>
+                  <v-col cols="12" sm="6" md="4">
+                    <v-file-input
+                      v-model="editedItem.Process_Path"
+                      label=" حمل الكتاب   "
+
+                    ></v-file-input>
+                  </v-col>
+                </v-row>
+                <!-- <v-row class="ma-2">
+                  <v-col sm="6">
+                    <v-select :items="stutas" 
+                      label=" حالة الكتاب  "
+                     item-text="Status_Name"
+                     item-value="id"
+                     v-model="editedItem.id"
+                      solo
+                    ></v-select >
+                  </v-col>
+                </v-row>  -->
+                <!-- <v-row class="ma-2">
+                  <v-col sm="6"
+                    ><v-select :items="period" 
+                      label=" المدة   "
+                     item-text="Period_Process"
+                     item-value="id"
+                     v-model="editedItem.id"
+                      solo
+                    ></v-select
+                  ></v-col>
+                </v-row> -->
                 <v-row>
                   <v-col cols="12" sm="6" md="4">
                     <v-text-field
@@ -149,7 +204,7 @@ export default {
   data() {
 
     return {
-      selected:null,
+    
       loading: true,
       item: [],
       dialogDelete: false,
@@ -165,36 +220,45 @@ export default {
         { text: "نوع الكتاب", value: "bookType.book_Type_Name" },
         { text: "رقم الكتاب", value: "book_No" },
         { text: "تاريخ الكتاب", value: "book_Date" },
+        { text: "تاريخ الارسال", value: "Send_Reciev_Date" },
         { text: "موضوع لاجراءا", value: "process_Subj" },
         { text: "تفاصيل لاجراءا", value: "process_Details" },
-        { text: " الدائرة", value: "org.OrgId" },
+        // { text: "حالة الكتاب", value: "Status_Name" },
+        // { text: "مدة انجاز ", value: "Period_Proces" },
+        { text: "تنزيل الكتاب", value: "Process_Path" },
+        { text: " الدائرة", value: "org.org_Name" },
         { text: "تعديل", value: "edit" },
         { text: "حذف", value: "dlt" },
       ],
     
       editedItem: {
-        id:"",
+
         book_No: "",
         book_Date:"",
         process_Subj: "",
         process_Details:"",
         book_Type_Name:"",
-        OrgId:""
+        id:"",
+        OrgId:"",
+        Process_Path:"",
+      
         
       },
       defaultItem: {
-        Book_TypeId:"",
         book_No: "",
         book_Date:"",
         process_Subj: "",
         process_Details:"",
         book_Type_Name:"",
-        OrgId:""
+       id:"",
+        OrgId:"",
+        Process_Path:"",
+      
       },
       bookType:[],
     
-     org:[]
-      
+      org:[],
+      period:[]
     
     };
   },
@@ -307,7 +371,12 @@ export default {
           this.bookType=response.data;
         });
         },  
-       
+        getgdataorg(){axios
+        .get('https://localhost:7001/Org')
+        .then((response) => {
+          this.org=response.data;
+        });
+        },  
     },
   
 
@@ -319,7 +388,8 @@ mounted(){
   created() {
    this.getdata()
 
-    this.getgdata()
+    this.getgdata(),
+    this.getgdataorg()
   },
 };
 </script>
