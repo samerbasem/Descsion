@@ -104,28 +104,28 @@
                     ></v-file-input>
                   </v-col>
                 </v-row>
-                <!-- <v-row class="ma-2">
+                <v-row class="ma-2">
                   <v-col sm="6">
-                    <v-select :items="stutas" 
+                    <v-select :items="suttas" 
                       label=" حالة الكتاب  "
-                     item-text="Status_Name"
-                     item-value="id"
-                     v-model="editedItem.id"
+                     item-text="status_Name"
+                     item-value="statusId"
+                     v-model="editedItem.statusId"
                       solo
                     ></v-select >
                   </v-col>
-                </v-row>  -->
-                <!-- <v-row class="ma-2">
+                </v-row> 
+                <v-row class="ma-2">
                   <v-col sm="6"
                     ><v-select :items="period" 
                       label=" المدة   "
-                     item-text="Period_Process"
+                     item-text="durationText"
                      item-value="id"
-                     v-model="editedItem.id"
+                     v-model="editedItem.durationId"
                       solo
                     ></v-select
                   ></v-col>
-                </v-row> -->
+                </v-row>
                 <v-row>
                   <v-col cols="12" sm="6" md="4">
                     <v-text-field
@@ -223,8 +223,8 @@ export default {
         { text: "تاريخ الارسال", value: "Send_Reciev_Date" },
         { text: "موضوع لاجراءا", value: "process_Subj" },
         { text: "تفاصيل لاجراءا", value: "process_Details" },
-        // { text: "حالة الكتاب", value: "Status_Name" },
-        // { text: "مدة انجاز ", value: "Period_Proces" },
+         { text: "حالة الكتاب", value: "suttas.status_Name" },
+        { text: "مدة انجاز ", value: "durationText" },
         { text: "تنزيل الكتاب", value: "Process_Path" },
         { text: " الدائرة", value: "org.org_Name" },
         { text: "تعديل", value: "edit" },
@@ -241,6 +241,9 @@ export default {
         id:"",
         OrgId:"",
         Process_Path:"",
+        status_Name:"",
+        statusId:"",
+        durationId:""
       
         
       },
@@ -253,12 +256,15 @@ export default {
        id:"",
         OrgId:"",
         Process_Path:"",
-      
+        status_Name:"",
+        statusId:"",
+        durationId:""
       },
       bookType:[],
     
       org:[],
-      period:[]
+      period:[],
+      suttas:[]
     
     };
   },
@@ -370,11 +376,24 @@ export default {
         .then((response) => {
           this.bookType=response.data;
         });
-        },  
+        }, 
+       
         getgdataorg(){axios
         .get('https://localhost:7001/Org')
         .then((response) => {
           this.org=response.data;
+        });
+        },  
+        getgdatast(){axios
+        .get(' https://localhost:7001/Statuses ')
+        .then((response) => {
+          this.suttas=response.data;
+        });
+        },  
+        getgdatperiod(){axios
+        .get(' https://localhost:7001/Durations ')
+        .then((response) => {
+          this.period=response.data;
         });
         },  
     },
@@ -389,7 +408,9 @@ mounted(){
    this.getdata()
 
     this.getgdata(),
-    this.getgdataorg()
+    this.getgdataorg(),
+    this.getgdatast(),
+    this.getgdatperiod()
   },
 };
 </script>
