@@ -99,7 +99,7 @@
                   <v-col cols="12" sm="6" md="4">
                     <v-file-input  type="file"
                       v-model="editedItem.Process_Path" 
-                      label=" حمل الكتاب   "
+                      label=" حمل الكتاب dd  "
 @change="onfileselected"
                     ></v-file-input>
                   </v-col>
