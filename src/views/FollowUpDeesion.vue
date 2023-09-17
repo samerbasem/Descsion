@@ -45,11 +45,11 @@
               <v-container>
                 <v-row class="ma-2">
                   <v-col sm="6"
-                    ><v-select :items="bookType" 
+                    ><v-select :items="book_Type" 
                       label=" نوع الكتاب "
                      item-text="book_Type_Name"
                      item-value="id"
-                     v-model="editedItem.id"
+                     v-model="editedItem.Book_TypeId"
                       solo
                     ></v-select
                   ></v-col>
@@ -83,24 +83,24 @@
                 <v-row class="ma-2">
                   <v-col sm="6">
                   <v-select
-                  v-model="editedItem.OrgId"
+                  v-model="editedItem.orgId"
     :items="org"
     label="اختر الدائرة او القسم لطفا "
     item-text="org_Name"
-    item-value=""
+    item-value="id"
     
   >
   </v-select>
                   </v-col>
 
-                  Process_Path
+                
                 </v-row>
                 <v-row>
                   <v-col cols="12" sm="6" md="4">
-                    <v-file-input
-                      v-model="editedItem.Process_Path"
+                    <v-file-input  type="file"
+                      v-model="editedItem.Process_Path" 
                       label=" حمل الكتاب   "
-
+@change="onfileselected"
                     ></v-file-input>
                   </v-col>
                 </v-row>
@@ -109,7 +109,7 @@
                     <v-select :items="suttas" 
                       label=" حالة الكتاب  "
                      item-text="status_Name"
-                     item-value="statusId"
+                     item-value="id"
                      v-model="editedItem.statusId"
                       solo
                     ></v-select >
@@ -206,7 +206,7 @@ export default {
     return {
     
       loading: true,
-      item: [],
+      selectedfile:null,
       dialogDelete: false,
       editValue:false,
       dialog: false,
@@ -217,14 +217,14 @@ export default {
           value: "Id",
         },
       
-        { text: "نوع الكتاب", value: "bookType.book_Type_Name" },
+        { text: "نوع الكتاب", value: "book_Type.book_Type_Name" },
         { text: "رقم الكتاب", value: "book_No" },
         { text: "تاريخ الكتاب", value: "book_Date" },
-        { text: "تاريخ الارسال", value: "Send_Reciev_Date" },
+        { text: "تاريخ الارسال", value: "send_Reciev_Date" },
         { text: "موضوع لاجراءا", value: "process_Subj" },
         { text: "تفاصيل لاجراءا", value: "process_Details" },
-         { text: "حالة الكتاب", value: "suttas.status_Name" },
-        { text: "مدة انجاز ", value: "durationText" },
+         { text: "حالة الكتاب", value: "status.status_Name" },
+        { text: "مدة انجاز ", value: "duration.durationText" },
         { text: "تنزيل الكتاب", value: "Process_Path" },
         { text: " الدائرة", value: "org.org_Name" },
         { text: "تعديل", value: "edit" },
@@ -232,36 +232,39 @@ export default {
       ],
     
       editedItem: {
-
+        Book_TypeId:"",
         book_No: "",
         book_Date:"",
         process_Subj: "",
         process_Details:"",
         book_Type_Name:"",
         id:"",
-        OrgId:"",
+        orgId:"",
         Process_Path:"",
         status_Name:"",
         statusId:"",
-        durationId:""
+        durationId:"",
+        Send_Reciev_Date:""
       
         
       },
       defaultItem: {
+        Book_TypeId:"",
         book_No: "",
         book_Date:"",
         process_Subj: "",
         process_Details:"",
         book_Type_Name:"",
-       id:"",
-        OrgId:"",
+      Id:"",
+      orgId:"",
         Process_Path:"",
         status_Name:"",
         statusId:"",
-        durationId:""
+        durationId:"",
+        Send_Reciev_Date:""
       },
-      bookType:[],
-    
+      item:[],
+      book_Type:[],
       org:[],
       period:[],
       suttas:[]
@@ -296,7 +299,16 @@ export default {
       this.dialog = true;
       console.log(this.editedIndex);
     },
+    onfileselected(event){ console.log(event)
+this.selectedfile=event.target.files(0)
+
+    },
     
+    upload(){
+
+axios.post('https://localhost:7001/Decision_Processes')
+
+    },
     deleteItem(item) {
       this.editedIndex = item.id;
       this.editedItem = Object.assign({}, item);
@@ -359,6 +371,9 @@ export default {
       this.editValue = false;
     },
 
+
+
+
     getdata() {
       this.loading = true;
       axios
@@ -374,7 +389,7 @@ export default {
         getgdata(){axios
         .get('https://localhost:7001/BookTypes')
         .then((response) => {
-          this.bookType=response.data;
+          this.book_Type=response.data;
         });
         }, 
        
