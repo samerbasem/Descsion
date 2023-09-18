@@ -20,7 +20,7 @@
     
 
     :loading="loading"
-    loading-text="انتظر كثيرا"
+    loading-text="انتظر قليلا"
     sort-by="id"
     :items-per-page="20"
     class="elevation-5"
