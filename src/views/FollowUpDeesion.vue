@@ -1,18 +1,7 @@
 <template>
   <div>
-    <v-card
-    class="mx-auto"
-    max-width="1200"
-    style="margin-top: 300px;"
-    elevation="24"
-    value="rounded-xl"
-    
-  >
     <v-img src="@/assets/img106.jpg" height="300px" cover></v-img>
-    <br />
-    </v-card>
   <v-row>
-
 <v-col cols="7">
   <v-data-table
     :headers="headers"
@@ -49,7 +38,7 @@
                       label=" نوع الكتاب "
                      item-text="book_Type_Name"
                      item-value="id"
-                     v-model="editedItem.Book_TypeId"
+                     v-model="editedItem.book_TypeId"
                       solo
                     ></v-select
                   ></v-col>
@@ -232,7 +221,7 @@ export default {
       ],
     
       editedItem: {
-        Book_TypeId:"",
+        book_TypeId:"",
         book_No: "",
         book_Date:"",
         process_Subj: "",
@@ -249,7 +238,7 @@ export default {
         
       },
       defaultItem: {
-        Book_TypeId:"",
+        book_TypeId:"",
         book_No: "",
         book_Date:"",
         process_Subj: "",
