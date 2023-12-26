@@ -211,9 +211,21 @@ export default {
         });
     },
     EditmitEntry() {
+      var data = this.formdata
+   // هذا اليوزر الحالي
+   var userName = JSON.parse(localStorage.getItem("vuex"))?.auth?.user?.userName
+data.User_Update = userName
+
+// حاليا شغال بس مو صحيح .. المفروض مثل ما كتلج ابو الباك يتحكم عن طريق التوكين يعرف اليوزر ويخزنة زين نور تريد تحجي ويا .. اوك
+
       axios
         .put("https://localhost:7001/Decisions/" + this.id, this.formdata)
         .then(response => {
+       
+       
+//اريدا ينخزن
+// وين ينخزن بالداتة بيس ؟اي .. هذا ابو الباك هو يتحكم 
+// وين الايند بوينت ؟
           this.$router.push("/ViewDesicion");
           console.log(response);
         })

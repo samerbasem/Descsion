@@ -287,7 +287,7 @@ h3 {
 .slider--container {
   position: relative; /* "relative", so that h1 and images can be set absolutely */
   height: 50vh; /* Adjust the height to your needs here */
-  width: 58vw; /* Adjust the width to your needs here */
+
   margin: 0 auto;
   overflow: hidden;
   border-radius: 1.125rem;
@@ -357,9 +357,9 @@ h3 {
 
 .slider--image {
   position: absolute;
-  z-index: 1;
-  left: 0;
-  top: 0;
+
+
+
   height: 200%;
   width: 100%;
   object-fit: cover;

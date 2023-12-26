@@ -12,13 +12,13 @@ const getters = {
 };
 const actions = {
     logoutAction({ commit, state }) {
-        let loader = Vue.$loading.show({
-            loader: "dots",
-            transition: "fade",
-            color: "#c30734"
-        });
+        
+        
+        
+        
+        
         axios
-            .post("https://localhost:7001/Auth/logout", state.token, {
+            .post("https://localhost:7001/Auth/logout", { token: state.token}, {
                 headers: {
                     Authorization: "Bearer " + state.token
                 }
@@ -32,11 +32,15 @@ const actions = {
                         showConfirmButton: false,
                         timer: 1000
                     }).then(() => {
-                        location.assign("/");
-                        commit("logout");
+                        
+                        
                     });
+                    
                 }
             });
+
+            location.assign("/");
+commit("logout");
     },
     setUserAction({ commit }, response) {
         commit("setUser", response);
@@ -62,6 +66,8 @@ const mutations = {
         state.user = null;
         state.token = null;
         state.roles = null;
+        localStorage.clear()
+        localStorage.removeItem("vuex")
     },
 };
 export default {

@@ -106,6 +106,11 @@ const router = new VueRouter({
   routes,
 });
 router.beforeEach((to, from, next) => {
+
+ // var vuex = JSON.parse(localStorage.getItem("vuex"))
+
+  // if(!vuex) return next("/login")
+
   if (to.matched.some((route) => route.meta.requiresAuth)) {
     if (store.getters.isAuth) {
       return next();
