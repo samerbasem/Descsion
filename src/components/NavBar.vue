@@ -1,60 +1,32 @@
 <template>
-  
   <div>
-    <v-app-bar
-      color="light-blue accent-4"
-      
-      dark
-    >
-      <v-app-bar-nav-icon></v-app-bar-nav-icon>
-
-      <v-toolbar-title>برنامج قرارات مجلس الوزراء</v-toolbar-title>
+    <v-app-bar color="blue lighten-13" dark>
+      <v-toolbar-title style="color: rgb(227, 223, 235); font-size: 35px">
+        نظام القرارات
+      </v-toolbar-title>
 
       <v-spacer></v-spacer>
 
-      <v-btn icon>
-        <v-icon>mdi-heart</v-icon>
-      </v-btn>
-
-      <v-btn icon>
-        <v-icon>mdi-magnify</v-icon>
-      </v-btn>
-
-      <v-menu
-        left
-        bottom
-      >
-        <template v-slot:activator="{ on, attrs }">
-          <v-btn
-            icon
-            v-bind="attrs"
-            v-on="on"
-          >
-            <v-icon>mdi-dots-vertical</v-icon>
-          </v-btn>
-        </template>
-
-        <v-list>
-          <v-list-item
-            v-for="n in 5"
-            :key="n"
-            @click="() => {}"
-          >
-            <v-list-item-title>Option {{ n }}</v-list-item-title>
-          </v-list-item>
-        </v-list>
-      </v-menu>
+      <v-col sm="8" md="2">
+        <v-btn
+          block
+          rounded
+          size="x"
+          style="font-size: 25px"
+          color="primary"
+          height="50px"
+          elevation="13"
+          to="/LoginView"
+        >
+          تسجيل خروج</v-btn
+        >
+      </v-col>
     </v-app-bar>
   </div>
-
 </template>
 
 <script>
-export default {
-
-}
+export default {};
 </script>
 
-<style>
-
-</style>
+<style></style>
