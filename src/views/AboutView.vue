@@ -49,10 +49,12 @@
                 item-value="id"
                 v-model="formdata.general_CategId"
                 solo
-                :rules="[(v) => !!v || 'يجب ادخال نوع التبويب الرئيسي']"
+                :rules="[validateNotEmpty, validateDuplicate]"
+              
               
                @change="DetailSubCatg(formdata.general_CategId)"    
               ></v-select>
+              <v-alert v-if="validationError" type="error">{{ validationError }}</v-alert>
             </v-col>
             <v-col cols="6">
               <v-select
@@ -76,6 +78,7 @@
                 clearable
                 color="#2196F3"
                 :rules="[(v) => !!v || 'يجب ادخال رقم الكتاب']"
+                
               ></v-text-field>
             </v-col>
             <v-col cols="6">
@@ -110,8 +113,11 @@
                 label=" رقم القرار"
                 clearable
                 color="#2196F3"
-                :rules="[(v) => !!v || 'يجب ادخال رقم القرار']"
+                :rules="[validateNotEmpty, validateDuplicate]"
+              
               ></v-text-field>
+              <v-alert v-if="validationError" type="error">{{ validationError }}</v-alert>
+        
             </v-col>
           </v-row>
           <v-col cols="12">
@@ -192,13 +198,35 @@ export default {
        
       },
       files: [],
+      numbers:[],
      
+      validationError: '',
       file:"",
       error: [],
     };
   },
   //////////////////////////////////////////////
   methods: {
+ 
+    validateNotEmpty(value) {
+      return !!value || 'لايجوز ترك الحقل فارغ ';
+    },
+    validateDuplicate(value) {
+      this.validationError = ''; // Reset previous validation error
+      const isDuplicate = this.numbers.includes(Number(value)) && value !== '';
+      if (isDuplicate) {
+        this.validationError = 'انتبه رقم القرار مكرر';
+      }
+      return this.validationError || true; // Return true if validation passes, otherwise return the error message
+    },
+    watch: {
+    inputNumber(newNumber) {
+      // Add the number to the array when the input changes
+      this.numbers.push(Number(newNumber));
+    }
+  },
+ 
+///////
     async submitEntry() {
       this.error = [];
       var isValid = await this.$refs.form.validate();
