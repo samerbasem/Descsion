@@ -220,7 +220,7 @@ export default {
       return this.validationError || true; // Return true if validation passes, otherwise return the error message
     },
     watch: {
-    inputNumber(newNumber) {
+      deci_No(newNumber) {
       // Add the number to the array when the input changes
       this.numbers.push(Number(newNumber));
     }
