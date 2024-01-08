@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-navigation-drawer v-model="drawer" absolute right>
+    <v-navigation-drawer v-model="drawer" absolute right temporary>
       <v-list-item>
         <v-list-item-avatar></v-list-item-avatar>
       </v-list-item>
@@ -13,7 +13,7 @@
           <v-list-item-icon>
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-icon>
-
+       
           <v-list-item-content>
             <v-list-item-title>{{ item.title }}</v-list-item-title>
           </v-list-item-content>
@@ -68,13 +68,16 @@
         to="/AddPermation"
         style="width: 170px"
       >اعطاء صلاحيات للمستخدمين</v-btn>
+   
     </v-navigation-drawer>
-
+  
     <v-app-bar app clipped-left color="#7C93C3" dark>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <div class="d-flex align-center"></div>
 
-      <v-spacer></v-spacer>
+      <v-spacer>
+        
+      </v-spacer>
 
       <span class="mr-8">
         مرحبا
@@ -82,8 +85,8 @@
 
        
       </span>
-
-      <v-btn text @click="$vuetify.theme.dark = !$vuetify.theme.dark">
+      <v-btn  style="left:300px;" color="#7C93C3" height="30px" elevation="10" @click="logoutAction()">تسجيل خروج</v-btn>
+      <v-btn text @click="$vuetify.theme.dark = !$vuetify.theme.dark" fab >
         <button
           type="button"
           class="v-icon notranslate mx-2 v-icon--link mdi mdi-theme-light-dark theme--light"
@@ -91,7 +94,7 @@
         ></button>
       </v-btn>
 
-      <v-btn color="#7C93C3" height="30px" elevation="10" @click="logoutAction()">تسجيل خروج</v-btn>
+     
     </v-app-bar>
   </div>
 </template>
@@ -127,6 +130,6 @@ span {
   margin-left: 1200px;
 }
 button{
-  margin-left: 20px;
+  margin-left: 200px;
 }
 </style>

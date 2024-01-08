@@ -15,63 +15,61 @@
             <img class="slider--image" src="@/assets/img999.jpg" alt="winter-03" />
             <img class="slider--image" src="@/assets/img999.jpg" alt="winter-04" />
           </div>
-          <br />
-          <br />
-          <v-row >
-         
-              <article>
-            مجلس الوزراء يوافق على تمويل الشركة العامة لتجارة المواد الغذائية
-            بأكثر من ترليون دينار وافق مجلس الوزراء في جلسته الاعتيادية الحادية
-            والأربعين المنعقدة في 2023/10/9 على تمويل حساب الشركة العامة لتجارة
-            المواد الغذائية التابعة إلى وزارة التجارة بترليون وثلاثمئة وعشرين
-            مليار دينار ؛ إستنادا إلى المادة ( 60 ) من قانون الموازنة العامة
-            الاتحادية لجمهورية العراق للسنوات (2023-2024-2025). وتاتي موافقة
-            المجلس تماشيا مع البرنامج الحكومي لعام 2023 والمتضمن توزيع سلات غذائية
-            للمواطنين عدد (10 وجبات) ، و ( 12 وجبة )لفئة الرعاية الاجتماعية
-            ومحدودي الدخل ولضمان انسيابية استمرار تنفيذ البرنامج الحكومي بانسيابية
-            وفي الأوقات المحددة له. مجلس الوزراء يحيل المتبقي من أعمال مشروع ماء
-            المسيب على احدى الشركات ويلزمها بتقديم ضمانات إضافية قرر مجلس الوزراء
-            في جلسته الاعتيادية الحادية والأربعين المنعقدة في 2023/10/9 الموافقة
-            على إحالة مشروع ( تنفيذ الأعمال المتبقية لمشروع ماء المسيب ) إلــى
-            شركة العزة للمقاولات العامة استثناءًا من أساليب التعاقد المنصوص عليها
-            في المادة ( 3 ) من تعليمات تنفيذ العقود الحكومية ( 2 لسنة 2014
-            )بالأسعار نفسها وبمدة جديدة تحتسب على أساس المتبقي من المشروع بخطاب
-            الضمان نفسه. و جاء في نص القرار إلزام الشركة المذكورة تقديم ضمانات
-            إضافية ؛ للإسراع في إنجاز المشروع خدمة للمصلحة العامة . مجلس الوزراء
-            يوافق على محضر اجتماع الفريق الوزاري المعني بإنشاء المدن الجديدة وافق
-            مجلس الوزراء في جلسته الاعتيادية الحادية والأربعين المنعقدة في
-            2023/10/9 على محضر الاجتماع رقم (8) للفريق الوزاري المؤلف بموجب قرار
-            مجلس الوزراء (23121 لسنة 2023) المكلف بإنشاء المدن الجديدة بحسب وزارة
-            الإعمار والإسكان والبلديات والأشغال العامة. وتضمنت موافقة المجلس إقرار
-            التوصيات المثبتة في المحضر المذكور آنفا بشأن المدن الجديدة وهي
-            (الجواهري الجديدة / محافظة بغداد، ضفاف كربلاء الجديدة / محافظة كربلاء
-            المقدسة،و الغزلاني الجديدة / محافظة نينوى، والجنائن الجديدة / محافظة
-            بابل)،على ألّا تباع أكثر من ( 1 ‎%‎) من الوحدات السكنية من المستثمر
-            إلى أي شركة أو فرد آخر وتخويل الفريق الوزاري اعلاه صلاحية التفاوض مع
-            المستثمرين وتحويل النسبة المخصصة لمدينة الجواهري الجديدة من أراض إلى
-            وحدات سكنية.
-          </article>
-           
-           
-          </v-row>
           
-        </v-col>
-        <v-col cols="2">
+          
           <v-card class="pa-3" elevation="10" color="#EEF5FF">
+              <article>
+              مجلس الوزراء يوافق على تمويل الشركة العامة لتجارة المواد الغذائية
+              بأكثر من ترليون دينار وافق مجلس الوزراء في جلسته الاعتيادية الحادية
+              والأربعين المنعقدة في 2023/10/9 على تمويل حساب الشركة العامة لتجارة
+              المواد الغذائية التابعة إلى وزارة التجارة بترليون وثلاثمئة وعشرين
+              مليار دينار ؛ إستنادا إلى المادة ( 60 ) من قانون الموازنة العامة
+              الاتحادية لجمهورية العراق للسنوات (2023-2024-2025). وتاتي موافقة
+              المجلس تماشيا مع البرنامج الحكومي لعام 2023 والمتضمن توزيع سلات غذائية
+              للمواطنين عدد (10 وجبات) ، و ( 12 وجبة )لفئة الرعاية الاجتماعية
+              ومحدودي الدخل ولضمان انسيابية استمرار تنفيذ البرنامج الحكومي بانسيابية
+              وفي الأوقات المحددة له. مجلس الوزراء يحيل المتبقي من أعمال مشروع ماء
+              المسيب على احدى الشركات ويلزمها بتقديم ضمانات إضافية قرر مجلس الوزراء
+              في جلسته الاعتيادية الحادية والأربعين المنعقدة في 2023/10/9 الموافقة
+              على إحالة مشروع ( تنفيذ الأعمال المتبقية لمشروع ماء المسيب ) إلــى
+              شركة العزة للمقاولات العامة استثناءًا من أساليب التعاقد المنصوص عليها
+              في المادة ( 3 ) من تعليمات تنفيذ العقود الحكومية ( 2 لسنة 2014
+              )بالأسعار نفسها وبمدة جديدة تحتسب على أساس المتبقي من المشروع بخطاب
+              الضمان نفسه. و جاء في نص القرار إلزام الشركة المذكورة تقديم ضمانات
+              إضافية ؛ للإسراع في إنجاز المشروع خدمة للمصلحة العامة . مجلس الوزراء
+              يوافق على محضر اجتماع الفريق الوزاري المعني بإنشاء المدن الجديدة وافق
+              مجلس الوزراء في جلسته الاعتيادية الحادية والأربعين المنعقدة في
+              2023/10/9 على محضر الاجتماع رقم (8) للفريق الوزاري المؤلف بموجب قرار
+              مجلس الوزراء (23121 لسنة 2023) المكلف بإنشاء المدن الجديدة بحسب وزارة
+              الإعمار والإسكان والبلديات والأشغال العامة. وتضمنت موافقة المجلس إقرار
+              التوصيات المثبتة في المحضر المذكور آنفا بشأن المدن الجديدة وهي
+              (الجواهري الجديدة / محافظة بغداد، ضفاف كربلاء الجديدة / محافظة كربلاء
+              المقدسة،و الغزلاني الجديدة / محافظة نينوى، والجنائن الجديدة / محافظة
+              بابل)،على ألّا تباع أكثر من ( 1 ‎%‎) من الوحدات السكنية من المستثمر
+              إلى أي شركة أو فرد آخر وتخويل الفريق الوزاري اعلاه صلاحية التفاوض مع
+              المستثمرين وتحويل النسبة المخصصة لمدينة الجواهري الجديدة من أراض إلى
+              وحدات سكنية.
+            </article>
+            </v-card>
+        </v-col>
+       
+        
+          <v-col cols="2"  >
+           
+          <v-card class="pa-31" elevation="10" color="#EEF5FF">
+            <v-card-title xs2 style="font-size: 12px;">مواقع قد تهمك</v-card-title>
             <div class="d-flex align-center flex-column">
               <v-card width="100">
                 <v-card
                   class="mx-auto"
                   max-width="100"
                   height="100"
-               
                   title="Card title"
                   theme="dark"
                   color="#EEF5FF"
                 >
                   <div class="card p-0">
                     <div>
-                     
                       <div class="card-image">
                         <a href="https://cabinet.iq/ar">
                           <img src="@/assets/logo3.png" alt />
@@ -89,14 +87,12 @@
                   class="mx-auto"
                   max-width="100"
                   height="100"
-               
                   title="Card title"
                   theme="dark"
                   color="#EEF5FF"
                 >
                   <div class="card p-0">
                     <div>
-                      
                       <div class="card-image">
                         <a href="https://ur.gov.iq/">
                           <img src="@/assets/img333.png" alt />
@@ -114,18 +110,20 @@
                   class="mx-auto"
                   max-width="100"
                   height="100"
-               
                   title="Card title"
                   theme="dark"
                   color="#EEF5FF"
                 >
                   <div class="card p-0">
                     <div>
-                      
                       <div class="card-image">
                         <a href="https://pmo.iq/">
                           <img src="@/assets/مكتب رئيس الوزراء.jpg" alt />
-                          <img class="slider--image" src="@/assets/مكتب رئيس الوزراء.jpg" alt="winter-01" />
+                          <img
+                            class="slider--image"
+                            src="@/assets/مكتب رئيس الوزراء.jpg"
+                            alt="winter-01"
+                          />
                         </a>
                       </div>
                     </div>
@@ -139,7 +137,6 @@
                   class="mx-auto"
                   max-width="100"
                   height="100"
-               
                   title="Card title"
                   theme="dark"
                   color="#EEF5FF"
@@ -163,7 +160,6 @@
                   class="mx-auto"
                   max-width="100"
                   height="100"
-               
                   title="Card title"
                   theme="dark"
                   color="#EEF5FF"
@@ -182,7 +178,6 @@
               </v-card>
 
               <br />
-          
 
               <br />
               <v-card width="100">
@@ -190,7 +185,6 @@
                   class="mx-auto"
                   max-width="100"
                   height="100"
-               
                   title="Card title"
                   theme="dark"
                   color="#EEF5FF"
@@ -209,19 +203,17 @@
               </v-card>
 
               <br />
-              <v-card width="100" >
+              <v-card width="100">
                 <v-card
                   class="mx-auto"
                   max-width="100"
                   height="100"
-               
                   title="Card title"
                   theme="dark"
                   color="#EEF5FF"
                 >
                   <div class="card p-0">
                     <div>
-                    
                       <div class="card-image">
                         <a href="https://www.molsa.gov.iq/">
                           <img src="@/assets/وزارو العمل.jpg" alt />
@@ -236,19 +228,17 @@
               <br />
             </div>
           </v-card>
+       
         </v-col>
       </v-row>
-    </v-container>
-    <v-footer  color="#7C93C3">
-  
-        <v-card-title >
-          <h3 
-            >       تنفيذ _ قسم تقنية المعلومات _ شعبة هندسةالبرامجيات _ هاتف 2555  - 3005</h3
-          >
-
+        
        
-        </v-card-title>
-     
+      
+    </v-container>
+    <v-footer color="#7C93C3">
+      <v-card-title>
+        <h3>تنفيذ _ قسم تقنية المعلومات _ شعبة هندسةالبرامجيات _ هاتف 2555 - 3005</h3>
+      </v-card-title>
     </v-footer>
   </div>
 </template>
@@ -264,7 +254,6 @@ export default {
 </script>
 
 <style scoped>
-
 h1 {
   font-family: "Cairo", sans-serif;
   font-size: 40px;
@@ -272,27 +261,45 @@ h1 {
 }
 article {
   display: flex;
-justify-content: flex-end;
+  justify-content: flex-end;
   font-family: "Cairo", sans-serif;
- margin-right: 30px;
+  margin-right: 30px;
   color: rgb(34, 34, 56);
-  
 }
 h3 {
   font-family: "Cairo", sans-serif;
   text-align: center;
- color: #fff;
+  color: #fff;
 }
 
 .slider--container {
   position: relative; /* "relative", so that h1 and images can be set absolutely */
-  height: 50vh; /* Adjust the height to your needs here */
-
+  height: 55vh; /* Adjust the height to your needs here */
+  width: 68vw; /* Adjust the width to your needs here */
   margin: 0 auto;
   overflow: hidden;
-  border-radius: 1.125rem;
-  box-shadow: 0 0 0.4rem 0.15rem rgba(4, 60, 246, 0.25);
-  margin-top: 15px;
+  border-radius: 2.125rem;
+  box-shadow: 0 0 0.4rem 0.60rem rgba(3, 3, 240, 0.25);
+  margin-top: 20px;
+}
+.pa-3{
+  position: relative; /* "relative", so that h1 and images can be set absolutely */
+  height: 55vh; /* Adjust the height to your needs here */
+  width: 68vw; /* Adjust the width to your needs here */
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 2.125rem;
+  box-shadow: 0 0 0.4rem 1.60rem rgba(3, 3, 240, 0.25);
+  margin-top: 30px;
+}
+.pa-31{
+  position: relative; /* "relative", so that h1 and images can be set absolutely */
+   /* Adjust the width to your needs here */
+  margin: 0 auto;
+  overflow: hidden;
+  border-radius: 2.125rem;
+  box-shadow: 0 0 0.4rem 0.60rem rgba(240, 3, 3, 0.25);
+  margin-top: 30px;
 }
 
 .slider--heading {
@@ -357,9 +364,7 @@ h3 {
 
 .slider--image {
   position: absolute;
-
-
-
+  
   height: 200%;
   width: 100%;
   object-fit: cover;
@@ -733,7 +738,7 @@ h3 {
   margin: 0 !important;
   border-radius: 50px;
   overflow: hidden;
-  max-width:600px;
+  max-width: 600px;
   max-height: 800px;
   cursor: pointer;
   border: none;
@@ -748,7 +753,6 @@ h3 {
 .card .card-image img {
   width: 100%;
   max-height: 1200px;
-  
 }
 
 .card .card-content {
@@ -838,6 +842,5 @@ a {
   cursor: pointer;
   font-family: "Cairo", sans-serif;
 }
-
 </style>
 

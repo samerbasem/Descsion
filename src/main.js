@@ -10,7 +10,14 @@ import Loading from "vue-loading-overlay";
 import "vue-loading-overlay/dist/vue-loading.css";
 Vue.use(Loading);
 Vue.config.productionTip = false;
-
+//--- vue-toasted-----------------
+import Toast from "vue-toastification";
+import "vue-toastification/dist/index.css";
+Vue.use(Toast, {
+  transition: "Vue-Toastification__fade",
+  maxToasts: 20,
+  newestOnTop: true,
+});
 new Vue({
   vuetify,
   store,

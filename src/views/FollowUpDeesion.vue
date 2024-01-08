@@ -236,8 +236,6 @@
 <script>
 import axios from "axios";
 import format from "date-fns/format";
-import { mapGetters, mapActions } from "vuex";
-import auth from '@/store/modules/auth';
 export default {
   name: "followUpDesion",
 
@@ -319,12 +317,9 @@ export default {
     };
   },
   computed: {
-  
- ...mapGetters(["Auth"]),
     editTitle() {
       return "تعديل";
     },
-    ...mapGetters(["isAuth"]),
     deleteTitle() {
       return "حذف";
     },
@@ -349,7 +344,6 @@ export default {
   },
 
   methods: {
-    ...mapActions(["setUserAction", "setTokenAction", "setRolesAction"]),
     /*    addFiles(){
       const image = e.target.files[0];
                 const reader = new FileReader();
@@ -475,8 +469,7 @@ export default {
         formData.append("DurationId", this.editedItem.durationId);
         formData.append("Send_Reciev_Date", this.editedItem.send_Reciev_Date);
         formData.append("deci_No", this.editedItem.deci_No);
-        formData.append("User_Name", auth.user);
-        //////// is this correct 
+        formData.append("User_Name", this.editedItem.user_Name);
         formData.append(" Process_Path", this.editedItem.Process_Path);
         formData.append("File", this.files);
 
@@ -484,8 +477,6 @@ export default {
           .post("https://localhost:7001/Decision_Processes", formData)
           .then((response) => {
             if (response.status == 200 || response.status == 201) {
-          
-          
               loader.hide();
               this.dialog = false;
               this.loading = false;
@@ -504,9 +495,7 @@ export default {
       await axios
         .put(
           "https://localhost:7001/Decision_Processes/" + this.editedIndex,
-          this.editedItem,
-         // this.editedItem.user_Name=auth.user
-       
+          this.editedItem
         )
         .then(function (response) {
           console.log(response);

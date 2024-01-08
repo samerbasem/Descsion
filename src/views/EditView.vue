@@ -55,7 +55,7 @@
         <v-row>
           <v-col cols="6">
             <v-text-field
-              v-model="formdata.doc_no"
+              v-model="formdata.Doc_no"
               solo
               label=" رقم الكتاب"
               clearable
@@ -113,7 +113,7 @@
       <v-row justify="center" align="center">
         <v-col cols="12" sm="6" md="4">
         
-          <v-btn block  type="submit" @click.passive="EditmitEntry()" size="x-large" style="font-size: 30px;" color="#2196F3">حفظ التعديل </v-btn>
+          <v-btn block  type="submit" @click="EditmitEntry()" size="x-large" style="font-size: 30px;" color="#2196F3">حفظ التعديل </v-btn>
           
         </v-col>
       </v-row>
@@ -163,7 +163,7 @@ export default {
         GenCatg: [],
         DetailCatg: [],
         detail_Categ_Name: "",
-        doc_no: "",
+        Doc_no: "",
         doc_Date: "",
         deci_Year: "",
         deci_No: "",
@@ -211,23 +211,12 @@ export default {
         });
     },
     EditmitEntry() {
-      var data = this.formdata
-   // هذا اليوزر الحالي
-   var userName = JSON.parse(localStorage.getItem("vuex"))?.auth?.user?.userName
-data.User_Update = userName
-
-// حاليا شغال بس مو صحيح .. المفروض مثل ما كتلج ابو الباك يتحكم عن طريق التوكين يعرف اليوزر ويخزنة زين نور تريد تحجي ويا .. اوك
-
       axios
         .put("https://localhost:7001/Decisions/" + this.id, this.formdata)
         .then(response => {
-       
-       
-//اريدا ينخزن
-// وين ينخزن بالداتة بيس ؟اي .. هذا ابو الباك هو يتحكم 
-// وين الايند بوينت ؟
+          if(response.status == 200){
           this.$router.push("/ViewDesicion");
-          console.log(response);
+          }
         })
         .catch(error => {
           console.log(error);
@@ -262,7 +251,7 @@ data.User_Update = userName
             this.formdata.meet_TypeId = response.data.bookinfo.deciDto1.meet_TypeId
             this.formdata.general_CategId = response.data.bookinfo.deciDto1.general_CategId
             this.formdata.detail_CategId = response.data.bookinfo.deciDto1.detail_CategId
-            this.formdata.doc_no = response.data.bookinfo.deciDto1.doc_no
+            this.formdata.Doc_no = parseInt(response.data.bookinfo.deciDto1.doc_no)
             this.formdata.doc_Date = response.data.bookinfo.deciDto1.doc_Date
             this.formdata.deci_Year = response.data.bookinfo.deciDto1.deci_Year
             this.formdata.deci_No = response.data.bookinfo.deciDto1.deci_No
