@@ -121,7 +121,7 @@
               size="x-large"
               style="font-size: 30px"
               color="#2196F3"
-            >ارسال</v-btn>
+            >حقظ القرار</v-btn>
           </v-col>
         </v-card-subtitle>
       </v-form>
@@ -148,6 +148,7 @@
 <script>
 import axios from "axios";
 import { mapGetters } from "vuex";
+import Swal from "sweetalert2";
 export default {
   name: "AboutView",
 
@@ -236,12 +237,21 @@ export default {
             })
           .then(response => {
             if (response.status == 200 || response.status == 201) {
-              loader.hide()
+              loader.hide();
+              Swal.fire({
+              icon: "success",
+              title: "تم حفظ القرار بنجاح",
+              showConfirmButton: true
+            }).then(() => {
               this.$router.push("/");
+            });
+           
+              
             }
           })
           .catch(err => {
-            loader.hide()
+            loader.hide();
+            
             if (err.response.status == 400) {
               this.singleNotification("رقم القرار مكرر !");
               console.log(err);

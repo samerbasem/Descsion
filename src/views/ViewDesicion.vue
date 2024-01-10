@@ -207,10 +207,16 @@ export default {
 
         },
         {
+          text: "المستخدم",
+          align: "center",
+          value: "user_Name",
+        },
+        {
           text: "العمليات",
           align: "center",
           value: "actions",
         },
+       
       ],
       data: [],
     };

@@ -11,8 +11,9 @@
       <v-card-subtitle>
         <v-row>
           <v-col cols="6">
+            <label>رقم الجلسة</label>
             <v-text-field
-              v-model="formdata.meet_No"
+              v-model="fields.meet_No"
               solo
               label="رقم الجلسة"
               clearable
@@ -20,42 +21,46 @@
             ></v-text-field>
           </v-col>
           <v-col cols="6">
+            <label>نوع الجلسة</label>
             <v-select
-              :items="formdata.MeetTypes"
+              :items="fields.MeetTypes"
               label="نوع الجلسة"
               item-text="meet_Type_Name"
               item-value="id"
-              v-model="formdata.meet_TypeId"
+              v-model="fields.meet_TypeId"
               solo
             ></v-select>
           </v-col>
         </v-row>
         <v-row>
           <v-col cols="6">
+            <label>التبويب الرئيسي</label>
             <v-select
-              :items="formdata.GenCatg"
+              :items="fields.GenCatg"
               label="التبويب الرئيسي"
               item-text="general_Categ_Name"
               item-value="id"
-              v-model="formdata.general_CategId"
+              v-model="fields.general_CategId"
               solo
             ></v-select>
           </v-col>
           <v-col cols="6">
+            <label>التبويب الفرعي</label>
             <v-select
-              :items="formdata.DetailCatg"
+              :items="fields.DetailCatg"
               label="التبويب الفرعي"
               item-text="detail_Categ_Name"
               item-value="id"
-              v-model="formdata.detail_CategId"
+              v-model="fields.detail_CategId"
               solo
             ></v-select>
           </v-col>
         </v-row>
         <v-row>
           <v-col cols="6">
+            <label>رقم الكتاب</label>
             <v-text-field
-              v-model="formdata.Doc_no"
+              v-model="fields.Doc_no"
               solo
               label=" رقم الكتاب"
               clearable
@@ -63,9 +68,10 @@
             ></v-text-field>
           </v-col>
           <v-col cols="6">
+            <label>تاريخ الكتاب</label>
             <v-text-field
               type="text"
-              v-model="formdata.doc_Date"
+              v-model="fields.doc_Date"
               solo
               label=" تاريخ  الكتاب"
               clearable
@@ -75,8 +81,9 @@
         </v-row>
         <v-row>
           <v-col cols="6">
+            <label>سنة القرار</label>
             <v-text-field
-              v-model="formdata.deci_Year"
+              v-model="fields.Deci_Year"
               solo
               label=" سنة القرار"
               clearable
@@ -84,8 +91,9 @@
             ></v-text-field>
           </v-col>
           <v-col cols="6">
+            <label>رقم القرار</label>
             <v-text-field
-              v-model="formdata.deci_No"
+              v-model="fields.deci_No"
               solo
               label=" رقم القرار"
               clearable
@@ -94,8 +102,9 @@
           </v-col>
         </v-row>
         <v-col cols="12">
+          <label>موضوع القرار</label>
           <v-text-field
-            v-model="formdata.deci_Subject"
+            v-model="fields.deci_Subject"
             solo
             label=" موضوع القرار"
             clearable
@@ -104,17 +113,20 @@
         </v-col>
         <v-col cols="12">
           <h4>
-            <a href="#" @click="showDoc(formdata.deci_No)">
-              عرض المستند
-            </a>
+            <a href="#" @click="showDoc(fields.deci_No)">عرض المستند</a>
           </h4>
         </v-col>
       </v-card-subtitle>
       <v-row justify="center" align="center">
         <v-col cols="12" sm="6" md="4">
-        
-          <v-btn block  type="submit" @click="EditmitEntry()" size="x-large" style="font-size: 30px;" color="#2196F3">حفظ التعديل </v-btn>
-          
+          <v-btn
+            block
+            type="submit"
+            @click="EditmitEntry()"
+            size="x-large"
+            style="font-size: 30px;"
+            color="#2196F3"
+          >حفظ التعديل</v-btn>
         </v-col>
       </v-row>
 
@@ -123,76 +135,69 @@
       <br />
     </v-card>
     <br />
-      <br />
-    <v-footer
-    dark
-    padless
-  >
-    <v-card
-      class="flex"
-      flat
-      tile
-    >
-      <v-card-title class="primary">
-        <strong class="subheading">Get connected with us on social networks!</strong>
+    <br />
+    <v-footer dark padless>
+      <v-card class="flex" flat tile>
+        <v-card-title class="primary">
+          <strong class="subheading">Get connected with us on social networks!</strong>
 
-        <v-spacer></v-spacer>
-
-       
-      </v-card-title>
-
-     
-    </v-card>
-  </v-footer>
+          <v-spacer></v-spacer>
+        </v-card-title>
+      </v-card>
+    </v-footer>
   </div>
 </template>
 
 <script>
 import axios from "axios";
+import { mapGetters } from "vuex";
+import Swal from "sweetalert2";
 export default {
   name: "EditView",
 
   data() {
     return {
-      formdata: {
-        meet_No: "",
+      fields: {
+        meet_No: null,
         MeetTypes: [],
         id: null,
-        meet_Type_Name: "",
-        general_Categ_Name: "",
+        meet_Type_Name: null,
+        general_Categ_Name: null,
         GenCatg: [],
         DetailCatg: [],
-        detail_Categ_Name: "",
-        Doc_no: "",
-        doc_Date: "",
-        deci_Year: "",
-        deci_No: "",
-        deci_Subject: "",
-        meet_TypeId: "",
-        detail_CategId: "",
-        general_CategId: "",
-        
-      },
-    
+        detail_Categ_Name: null,
+        Doc_no: null,
+        doc_Date: null,
+        Deci_Year: null,
+        deci_No: null,
+        deci_Subject: null,
+        meet_TypeId: null,
+        detail_CategId: null,
+        general_CategId: null,
+        File: null
+      }
     };
   },
+  computed: {
+    ...mapGetters(["user", "token"])
+  },
   methods: {
-    showDoc(id){
+    showDoc(id) {
       // loading ...
       let loader = this.$loading.show({
         loader: "dots",
         transition: "fade",
-        color: "#c30734",
+        color: "#c30734"
       });
       axios
         .get("https://localhost:7001/Decisions/" + id)
-        .then((response) => {
+        .then(response => {
           if (response.status == 200) {
             var base64 = response.data.bookinfo.pdfBase64.trim();
             var formatType = "data:application/pdf;base64," + base64;
             fetch(formatType)
-              .then((res) => res.blob())
-              .then((blob) => {
+              .then(res => res.blob())
+              .then(blob => {
                 //---loading-overlay---
                 loader.hide();
                 const data = URL.createObjectURL(blob);
@@ -204,41 +209,71 @@ export default {
               });
           }
         })
-        .catch((error) => {
+        .catch(error => {
           //---loading-overlay---
           loader.hide();
           console.log(error);
         });
     },
     EditmitEntry() {
+      let loader = this.$loading.show({
+        container: this.$refs.newsContainer,
+        loader: "spinner",
+        transition: "fade",
+        color: "#c30734"
+      });
+      var formData = new FormData();
+      formData.append("meet_No", this.fields.meet_No);
+      formData.append("MeetTypes", this.fields.MeetTypes);
+      formData.append("meet_Type_Name", this.fields.meet_Type_Name);
+      formData.append("general_Categ_Name", this.fields.general_Categ_Name);
+      formData.append("GenCatg", this.fields.GenCatg);
+      formData.append("detail_Categ_Name", this.fields.detail_Categ_Name);
+      formData.append("Doc_no", this.fields.Doc_no);
+      formData.append("doc_Date", this.fields.doc_Date);
+      formData.append("deci_year", this.fields.Deci_Year);
+      formData.append("deci_No", this.fields.deci_No);
+      formData.append("deci_Subject", this.fields.deci_Subject);
+      formData.append("meet_TypeId", this.fields.meet_TypeId);
+      formData.append("detail_CategId", this.fields.detail_CategId);
+      formData.append("general_CategId", this.fields.general_CategId);
+      formData.append("File", this.fields.File);
       axios
-        .put("https://localhost:7001/Decisions/" + this.id, this.formdata)
+        .put("https://localhost:7001/Decisions/" + this.id, formData)
         .then(response => {
-          if(response.status == 200){
-          this.$router.push("/ViewDesicion");
+          if (response.status == 200) {
+            loader.hide();
+            Swal.fire({
+              icon: "success",
+              title: "تم تعديل القرار بنجاح",
+              showConfirmButton: true
+            }).then(() => {
+              this.$router.push("/ViewDesicion");
+            });
+           
           }
         })
         .catch(error => {
+          loader.hide();
           console.log(error);
-         
         });
     },
     /////////////////////////// ///////////////////////
     MeetTypesList() {
       axios.get("https://localhost:7001/MeetTypes").then(response => {
-        this.formdata.MeetTypes = response.data;
+        this.fields.MeetTypes = response.data;
       });
     },
     //////////////////////////////////////////////////////////////
     GenCatgList() {
       axios.get("https://localhost:7001/GenCatg").then(response => {
-        this.formdata.GenCatg = response.data;
+        this.fields.GenCatg = response.data;
       });
     },
     ///////////////////////////////////////////////////////
     DetailCatgList() {
       axios.get("https://localhost:7001/DetailCatg").then(response => {
-        this.formdata.DetailCatg = response.data;
+        this.fields.DetailCatg = response.data;
       });
     },
 
@@ -246,19 +281,24 @@ export default {
       axios
         .get("https://localhost:7001/Decisions/" + this.id)
         .then(response => {
-          if(response.status == 200 || response.status == 201){
-            this.formdata.meet_No = response.data.bookinfo.deciDto1.meet_No
-            this.formdata.meet_TypeId = response.data.bookinfo.deciDto1.meet_TypeId
-            this.formdata.general_CategId = response.data.bookinfo.deciDto1.general_CategId
-            this.formdata.detail_CategId = response.data.bookinfo.deciDto1.detail_CategId
-            this.formdata.Doc_no = parseInt(response.data.bookinfo.deciDto1.doc_no)
-            this.formdata.doc_Date = response.data.bookinfo.deciDto1.doc_Date
-            this.formdata.deci_Year = response.data.bookinfo.deciDto1.deci_Year
-            this.formdata.deci_No = response.data.bookinfo.deciDto1.deci_No
-            this.formdata.deci_Subject = response.data.bookinfo.deciDto1.deci_Subject
-            
+          if (response.status == 200 || response.status == 201) {
+            this.fields.meet_No = response.data.bookinfo.deciDto1.meet_No;
+            this.fields.meet_TypeId =
+              response.data.bookinfo.deciDto1.meet_TypeId;
+            this.fields.general_CategId =
+              response.data.bookinfo.deciDto1.general_CategId;
+            this.fields.detail_CategId =
+              response.data.bookinfo.deciDto1.detail_CategId;
+            this.fields.Doc_no = parseInt(
+              response.data.bookinfo.deciDto1.doc_no
+            );
+            this.fields.doc_Date = response.data.bookinfo.deciDto1.doc_Date;
+            this.fields.Deci_Year = response.data.bookinfo.deciDto1.deci_Year;
+            this.fields.deci_No = response.data.bookinfo.deciDto1.deci_No;
+            this.fields.deci_Subject =
+              response.data.bookinfo.deciDto1.deci_Subject;
           }
-          
+
           //here you must set values to v mode of each one
         });
     }

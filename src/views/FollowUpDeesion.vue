@@ -219,7 +219,7 @@
             </v-btn>
           </template>
           <template v-slot:[`item.Process_Path`]="{ item }">
-            <v-btn class="primary" elevation="2" @click="showFile(item.id)"
+            <v-btn class="primary" elevation="2" @click="showFile(item)"
               ><v-icon >mdi-folder</v-icon>
               عرض
             </v-btn>
@@ -234,6 +234,8 @@
 </template>
 
 <script>
+
+import { mapGetters } from "vuex";
 import axios from "axios";
 import format from "date-fns/format";
 export default {
@@ -320,6 +322,8 @@ export default {
     editTitle() {
       return "تعديل";
     },
+    
+ ...mapGetters(["user", "token"]),
     deleteTitle() {
       return "حذف";
     },
@@ -469,7 +473,8 @@ export default {
         formData.append("DurationId", this.editedItem.durationId);
         formData.append("Send_Reciev_Date", this.editedItem.send_Reciev_Date);
         formData.append("deci_No", this.editedItem.deci_No);
-        formData.append("User_Name", this.editedItem.user_Name);
+       // formData.append("User_Name", this.editedItem.user_Name);
+        formData.append("User_Name", this.user.userName);
         formData.append(" Process_Path", this.editedItem.Process_Path);
         formData.append("File", this.files);
 
