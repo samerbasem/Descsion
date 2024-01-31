@@ -103,16 +103,43 @@
               ></v-text-field>
             </v-col>
           </v-row>
-          <v-col cols="12">
-            <v-text-field
+          <v-col
+        cols="12"
+        md="6"
+      >
+        <v-textarea
+        v-model="formdata.deci_Subject"
+          solo
+          single-line="false"
+          label=" موضوع القرار"
+              clearable
+              color="#2196F3"
+             
+              :rules="[(v) => !!v || 'يجب ادخال موضوع القرار']"
+          name="input-7-4"
+          
+        ></v-textarea>
+      </v-col>
+
+
+
+
+
+
+
+
+          <!-- <v-col   cols="12"
+        md="6">
+            <v-textarea
               v-model="formdata.deci_Subject"
               solo
               label=" موضوع القرار"
               clearable
               color="#2196F3"
+              hint="Hint text"
               :rules="[(v) => !!v || 'يجب ادخال موضوع القرار']"
-            ></v-text-field>
-          </v-col>
+            ></v-textarea>
+          </v-col> -->
           <v-file-input v-model="files" label="File input" show-size></v-file-input>
           <v-col cols="12">
             <v-btn

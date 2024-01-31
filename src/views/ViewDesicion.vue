@@ -56,7 +56,7 @@
     > -->
       
     <!-- </v-toolbar> -->
-        <v-data-table
+        <v-data-table 
           :headers="headers"
           :items="data"
           elevation="24"
@@ -71,6 +71,9 @@
             <br/>
             <br/>
             <v-btn
+            v-if="
+           roles.find((el) => el == 'writer' || el == 'admin')
+         "
               :to="`EditView/${item.deci_No}`"
               color="success"
               rounded
@@ -81,6 +84,9 @@
             <br/>
             <br/>
             <v-btn
+            v-if="
+            roles.find((el) => el == 'admin')
+          "
               color="red"
               rounded
             
@@ -108,6 +114,7 @@
 <script>
 import axios from "axios";
 
+import { mapGetters } from "vuex";
 export default {
   name: "HomeView",
 
@@ -223,11 +230,17 @@ export default {
   },
 
   mounted() {
+    // {
+          //  headers: {
+            //  Authorization: "Bearer " + this.token,
+          //  }
+    // }
     this.fetchData();
   },
+  computed:{
+    ...mapGetters(["user", "token","roles"]),
+  },
   methods: {
-
-     
     showFile(docID) {
       // loading ...
       let loader = this.$loading.show({
@@ -236,7 +249,11 @@ export default {
         color: "#c30734",
       });
       axios
-        .get("https://localhost:7001/Decisions/" + docID)
+        .get("https://localhost:7001/Decisions/" + docID, {
+          headers: {
+           Authorization: "Bearer " + this.token,
+             },
+        })
         .then((response) => {
           if (response.status == 200) {
             var base64 = response.data.bookinfo.pdfBase64.trim();
@@ -261,10 +278,6 @@ export default {
           console.log(error);
         });
     },
-
-
-
-
     searchRole() {
       this.axios
         .get("https://localhost:7001/Decision/" + this.deci_no)
@@ -273,13 +286,14 @@ export default {
           console.log(resuit);
         });
     },
-
     deleteData(deci_no) {
       this.axios
         .delete("https://localhost:7001/Decisions/" + deci_no)
         .thin((result) => {
+          
           if (result.status == 204) {
-           // swal('هل انتة متأكد من حذف النص');
+            alert('هل انتة متأكد من حذف النص');
+           
           }
           this.fetchData();
         });
@@ -287,21 +301,18 @@ export default {
 
     fetchData() {
       axios
-        .get("https://localhost:7001/Decisions")
+        .get("https://localhost:7001/Decisions", {
+            headers: {
+              Authorization: "Bearer " + this.token,
+            },
+          })
         .then((resuit) => {
           this.data = resuit.data;
-          this.loading = false;
         });
     },
   },
 
-  watch: {
-    filter(v) {
-      console.log(v);
-      this.fetchData(v);
-      // call
-    },
-  },
+ 
 };
 </script>
 

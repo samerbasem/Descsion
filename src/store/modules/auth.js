@@ -12,11 +12,6 @@ const getters = {
 };
 const actions = {
     logoutAction({ commit, state }) {
-        
-        
-        
-        
-        
         axios
             .post("https://localhost:7001/Auth/logout", { token: state.token}, {
                 headers: {

@@ -14,6 +14,8 @@ import ShowDecision from "../views/ShowDecision.vue";
 import FollowUpDeesion from "../views/FollowUpDeesion.vue";
 import ReportView from "../views/ReportView.vue";
 import ViewDesicion from "../views/ViewDesicion.vue";
+import Descion_Org from "../views/Descion_Org.vue";
+import orgs from "../views/orgs.vue";
 Vue.use(VueRouter);
 
 const routes = [
@@ -90,7 +92,18 @@ const routes = [
     component: AddPermation,
     meta: { requiresAuth: true },
   },
-
+  {
+    path: "/Descion_Org",
+    name: "Descion_Org",
+    component: Descion_Org,
+    meta: { requiresAuth: true },
+  },
+  {
+    path: "/orgs",
+    name: "orgs",
+    component: orgs,
+    meta: { requiresAuth: true },
+  },
   {
     path: "/about",
     name: "about",

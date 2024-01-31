@@ -13,18 +13,18 @@
           <v-list-item-icon>
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-icon>
-       
+
           <v-list-item-content>
             <v-list-item-title>{{ item.title }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
 
-      <v-btn rounded color="#9EB8D9" dark to="/about" style="width: 170px">ادخال قرار جديد</v-btn>
+      <v-btn rounded color="#9EB8D9" dark to="/about" style="width: 220px"      v-if="roles.find((el) => el == 'writer' || el == 'admin')">ادخال قرار جديد</v-btn>
       <br />
       <br />
+      <v-btn rounded color="#9EB8D9" dark to="/ViewDesicion" style="width: 220px">عرض القرارات</v-btn>
 
-      <v-btn rounded color="#9EB8D9" dark to="/ViewDesicion" style="width: 170px">عرض القرارات</v-btn>
       <br />
       <br />
 
@@ -33,7 +33,7 @@
         color="#9EB8D9"
         dark
         to="/FollowUpDeesion"
-        style="width: 170px"
+        style="width: 220px"
       >متابعة اجراءات القرارات</v-btn>
       <br />
       <br />
@@ -42,23 +42,41 @@
         color="#9EB8D9"
         dark
         to="/ReportView"
-        style="width: 170px"
+        style="width: 220px"
       >تقارير اجراءات القرارات</v-btn>
       <br />
       <br />
+      <v-btn
+    rounded
+    color="#9EB8D9"
+    dark
+    to="/orgs"
+    style="width: 220px"
+  >عرض الجهات المرسل اليها القرار</v-btn>
+  <br />
+  <br />
+  <v-btn
+    rounded
+    color="#9EB8D9"
+    dark
+    to="/Descion_Org"
+    style="width: 220px"  v-if="roles.find((el) => el == 'writer' || el == 'admin')"
+  >اضافة الجهات المرسل اليها القرار</v-btn>
+  <br />
+ <br />
       <v-btn
         rounded
         color="#9EB8D9"
         dark
         to="/RegistesView/id"
-        style="width: 170px"
+        style="width: 220px"  v-if="roles.find((el) => el == 'admin' )"
       >اضافـــة مستخدم جديد</v-btn>
       <br />
       <br />
-      <v-btn rounded color="#9EB8D9" dark to="/RoleView" style="width: 170px">اضافـــة صلاحيات جديدة</v-btn>
+      <v-btn rounded color="#9EB8D9" dark to="/RoleView" style="width: 220px"  v-if="roles.find((el) => el == 'admin' )">اضافـــة صلاحيات جديدة</v-btn>
       <br />
       <br />
-      <v-btn rounded color="#9EB8D9" dark to="/UserView" style="width: 170px">عرض المستخدمين</v-btn>
+      <v-btn rounded color="#9EB8D9" dark to="/UserView" style="width: 220px" v-if="roles.find((el) => el == 'admin' )">عرض المستخدمين</v-btn>
       <br />
       <br />
       <v-btn
@@ -66,35 +84,55 @@
         color="#9EB8D9"
         dark
         to="/AddPermation"
-        style="width: 170px"
+        style="width: 220px" v-if="roles.find((el) => el == 'admin' )"
       >اعطاء صلاحيات للمستخدمين</v-btn>
-   
+      <br />
+      <br />
+    
+    
+    
+    
+    
+    
+    
+
+      <br />
+      <br />
+    
+    
+    
+    
+    
+    
+    
+      <br />
+      <br />
     </v-navigation-drawer>
-  
+
     <v-app-bar app clipped-left color="#7C93C3" dark>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <div class="d-flex align-center"></div>
 
-      <v-spacer>
-        
-      </v-spacer>
+      <v-spacer></v-spacer>
 
       <span class="mr-8">
         مرحبا
         {{ user.userName}}
-
-       
       </span>
-      <v-btn  style="left:300px;" color="#7C93C3" height="30px" elevation="10" @click="logoutAction()">تسجيل خروج</v-btn>
-      <v-btn text @click="$vuetify.theme.dark = !$vuetify.theme.dark" fab >
+      <v-btn
+        style="left:300px;"
+        color="#7C93C3"
+        height="30px"
+        elevation="10"
+        @click="logoutAction()"
+      >تسجيل خروج</v-btn>
+      <v-btn text @click="$vuetify.theme.dark = !$vuetify.theme.dark" fab>
         <button
           type="button"
           class="v-icon notranslate mx-2 v-icon--link mdi mdi-theme-light-dark theme--light"
           style
         ></button>
       </v-btn>
-
-     
     </v-app-bar>
   </div>
 </template>
@@ -113,8 +151,8 @@ export default {
   computed: {
     ...mapGetters(["user", "token", "roles"])
   },
-  methods:{
-    ...mapActions(["logoutAction"]),
+  methods: {
+    ...mapActions(["logoutAction"])
   },
   mounted() {
     this.$vuetify.ltr = true;
@@ -129,7 +167,7 @@ body {
 span {
   margin-left: 1200px;
 }
-button{
+button {
   margin-left: 200px;
 }
 </style>

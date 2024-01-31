@@ -57,8 +57,9 @@
           <v-col cols="2"  >
            
           <v-card class="pa-31" elevation="10" color="#EEF5FF">
-            <v-card-title xs2 style="font-size: 12px;">مواقع قد تهمك</v-card-title>
+         
             <div class="d-flex align-center flex-column">
+              <label>موقع الامانة العامة</label>
               <v-card width="100">
                 <v-card
                   class="mx-auto"
@@ -82,6 +83,7 @@
               </v-card>
 
               <br />
+              <label>بوابة اور</label>
               <v-card width="100">
                 <v-card
                   class="mx-auto"
@@ -105,6 +107,7 @@
               </v-card>
 
               <br />
+              <label> مكتب رئيس الوزراء</label>
               <v-card width="100">
                 <v-card
                   class="mx-auto"
@@ -132,6 +135,59 @@
               </v-card>
 
               <br />
+              <label>نظام البريد المركزي</label>
+              <v-card width="100">
+                <v-card
+                  class="mx-auto"
+                  max-width="100"
+                  height="100"
+                  title="Card title"
+                  theme="dark"
+                  color="#EEF5FF"
+                >
+                <div class="card p-0">
+                    <div>
+                   
+                      <div class="card-image">
+                        <a href="https://cmms.comsec.gov.iq/">
+                          <img class="img" src="@/assets/img12.jpg" alt />
+                          <img  class="slider--image" src="@/assets/img12.jpg" alt="winter-01" />
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </v-card>
+              </v-card>
+
+              <br />
+              <label>نظام الموارد البشرية</label>
+              <v-card width="100">
+                <v-card
+                  class="mx-auto"
+                  max-width="100"
+                  height="100"
+                  title="Card title"
+                  theme="dark"
+                  color="#EEF5FF"
+                >
+                <div class="card p-0">
+                    <div>
+                  
+                      <div class="card-image">
+                        <a href="https://vacation.comsec.gov.iq/">
+                          <img class="img" src="@/assets/hr.png" alt />
+                          <img class="slider--image" src="@/assets/hr.png" alt="winter-01" />
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </v-card>
+              </v-card>
+
+              <br />
+
+              <br />
+              
               <v-card width="100">
                 <v-card
                   class="mx-auto"
@@ -143,10 +199,10 @@
                 >
                   <div class="card p-0">
                     <div>
-                      <img class="slider--image" src="@/assets/img106.jpg" alt="winter-01" />
+                      <img class="slider--image" src="@/assets/hr.png" alt="winter-01" />
                       <div class="card-image">
                         <a href="https://epedu.gov.iq/index.php">
-                          <img src="@/assets/img106.jpg" alt />
+                          <img class="img" src="@/assets/hr.png" alt />
                         </a>
                       </div>
                     </div>
@@ -155,54 +211,7 @@
               </v-card>
 
               <br />
-              <v-card width="100">
-                <v-card
-                  class="mx-auto"
-                  max-width="100"
-                  height="100"
-                  title="Card title"
-                  theme="dark"
-                  color="#EEF5FF"
-                >
-                  <div class="card p-0">
-                    <div>
-                      <img class="slider--image" src="@/assets/img106.jpg" alt="winter-01" />
-                      <div class="card-image">
-                        <a href="https://epedu.gov.iq/index.php">
-                          <img src="@/assets/img106.jpg" alt />
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </v-card>
-              </v-card>
-
-              <br />
-
-              <br />
-              <v-card width="100">
-                <v-card
-                  class="mx-auto"
-                  max-width="100"
-                  height="100"
-                  title="Card title"
-                  theme="dark"
-                  color="#EEF5FF"
-                >
-                  <div class="card p-0">
-                    <div>
-                      <img class="slider--image" src="@/assets/img104.jpg" alt="winter-01" />
-                      <div class="card-image">
-                        <a href="https://epedu.gov.iq/index.php">
-                          <img src="@/assets/img104.jpg" alt />
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </v-card>
-              </v-card>
-
-              <br />
+              
               <v-card width="100">
                 <v-card
                   class="mx-auto"
@@ -216,8 +225,8 @@
                     <div>
                       <div class="card-image">
                         <a href="https://www.molsa.gov.iq/">
-                          <img src="@/assets/وزارو العمل.jpg" alt />
-                          <img class="slider--image" src="@/assets/وزارو العمل.jpg" alt="winter-01" />
+                          <img class="img" src="@/assets/img12.jpg" alt />
+                          <img  class="slider--image" src="@/assets/img12.jpg" alt="winter-01" />
                         </a>
                       </div>
                     </div>
@@ -365,10 +374,10 @@ h3 {
 .slider--image {
   position: absolute;
   
-  height: 200%;
+  height: 300%;
   width: 100%;
   object-fit: cover;
-  animation: 60s ease-in-out infinite;
+  animation: 40s ease-in-out infinite;
 }
 .slider--image:hover svg {
   filter: drop-shadow(2px -9px 4px rgba(37, 242, 14, 0.4));
@@ -753,6 +762,9 @@ h3 {
 .card .card-image img {
   width: 100%;
   max-height: 1200px;
+}
+img{
+  height: 90px;
 }
 
 .card .card-content {

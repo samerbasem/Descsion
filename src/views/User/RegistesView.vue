@@ -101,6 +101,7 @@
 </template>
 
 <script>
+  import Swal from "sweetalert2";
 import axios from "axios";
 export default {
  name:'RegistesView',
@@ -133,10 +134,37 @@ export default {
         axios
           .post("https://localhost:7001/User", this.formdata)
           .then((response) => {
-            console.log(response);
-            this.$router.push("/UserView");
-          });
 
+            if (response.status == 200 || response.status == 201) {
+   //  loader.hide();
+   Swal.fire({
+     icon: "success",
+     title: "تمت اضافة المستخدم بنجاح",
+     showConfirmButton: true,
+   }).then(() => {
+     // this.$router.push("/");
+   });
+    this.$router.push("/UserView");
+ 
+    
+ 
+    
+ 
+ }
+})
+ .catch((err) => {
+   if (err.response.status == 400) {
+     this.singleNotification(" اسم المستخدم مكرر");
+   }
+ });
+
+
+
+
+            
+            console.log(response);
+         
+         
         // .then((Response) =>{
 
         //  });
@@ -148,8 +176,8 @@ export default {
       }
     },
  },
-
 }
+
 </script>
 
 <style>

@@ -101,7 +101,31 @@
             ></v-text-field>
           </v-col>
         </v-row>
-        <v-col cols="12">
+        <v-col
+        cols="6"
+        md="6"
+      >
+        <label>موضوع القرار</label>
+        <v-textarea
+        v-model="fields.deci_Subject"
+          solo
+          single-line="false"
+          label=" موضوع القرار"
+              clearable
+              color="#2196F3"
+             
+              filled
+          auto-grow
+       
+          rows="1"
+          row-height="30"
+          shaped
+          name="input-7-4"
+          
+        ></v-textarea>
+
+        </v-col>
+        <!-- <v-col cols="12">
           <label>موضوع القرار</label>
           <v-text-field
             v-model="fields.deci_Subject"
@@ -110,7 +134,7 @@
             clearable
             color="#2196F3"
           ></v-text-field>
-        </v-col>
+        </v-col> -->
         <v-col cols="12">
           <h4>
             <a href="#" @click="showDoc(fields.deci_No)">عرض المستند</a>
@@ -174,7 +198,9 @@ export default {
         meet_TypeId: null,
         detail_CategId: null,
         general_CategId: null,
-        File: null
+        File: null,
+        user_Update:"",
+      
       }
     };
   },
@@ -237,6 +263,9 @@ export default {
       formData.append("meet_TypeId", this.fields.meet_TypeId);
       formData.append("detail_CategId", this.fields.detail_CategId);
       formData.append("general_CategId", this.fields.general_CategId);
+      formData.append("user_Update", this.user.userName);
+     
+      
       formData.append("File", this.fields.File);
       axios
         .put("https://localhost:7001/Decisions/" + this.id, formData)
@@ -245,7 +274,7 @@ export default {
             loader.hide();
             Swal.fire({
               icon: "success",
-              title: "تم تعديل القرار بنجاح",
+              title: "هل ترغب بالتعديل",
               showConfirmButton: true
             }).then(() => {
               this.$router.push("/ViewDesicion");

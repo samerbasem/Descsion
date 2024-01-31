@@ -14,12 +14,14 @@
         <v-data-table
           :headers="headers"
           :items="item"
+          elevation="24"
           :search="search"
           :loading="loading"
           loading-text="انتظر كثيرا"
           sort-by="id"
           :items-per-page="20"
-          class="elevation-5"
+          :class="fixed-width-datatable"
+        
          
         >
           <template v-slot:top>
@@ -35,6 +37,7 @@
                     class="mx-4"
                     v-bind="attrs"
                     v-on="on"
+                    v-if="roles.find((el) => el == 'writer' || el == 'admin')"
                   >
                     ادخال اجراءات جديدة
                   </v-btn>
@@ -69,10 +72,12 @@
                       </v-row>
                       <v-row>
                         <v-col cols="12" sm="6" md="4">
+                          <div class="multiline-content">
                           <v-text-field
                             v-model="editedItem.book_No"
                             label="رقم الكتاب   "
                           ></v-text-field>
+                          </div>
                         </v-col>
                         <v-col cols="12" sm="6" md="4">
                           <v-text-field
@@ -83,12 +88,15 @@
                       </v-row>
 
                       <v-row>
-                        <v-col cols="12" sm="20" md="12">
-                          <v-text-field
+                        <v-col cols="12" sm="6" md="6"  >
+                         
+                           <v-textarea 
                             v-model="editedItem.process_Details"
                             label="تفاصيل الاجراء   "
-                          ></v-text-field>
+                          ></v-textarea>
+                       
                         </v-col>
+                     
                       </v-row>
                       <v-row>
                         <v-col cols="12" sm="60" md="4">
@@ -207,20 +215,24 @@
           </template>
 
           <template v-slot:[`item.edit`]="{ item }">
-            <v-btn class="success" elevation="2" @click="edit(item)"
+            <v-btn
+              v-if="roles.find((el) => el == 'writer' || el == 'admin')"
+              class="success"
+              elevation="2"
+              @click="edit(item)"
               ><v-icon> mdi-pencil</v-icon>
               {{ editTitle }}
             </v-btn>
           </template>
           <template v-slot:[`item.dlt`]="{ item }">
-            <v-btn class="red" elevation="2" @click="deleteItem(item)"
+            <v-btn class="red" elevation="2" @click="deleteItem(item)"   v-if="roles.find((el) => el == 'admin')"
               ><v-icon>mdi-delete</v-icon>
               {{ deleteTitle }}
             </v-btn>
           </template>
           <template v-slot:[`item.Process_Path`]="{ item }">
-            <v-btn class="primary" elevation="2" @click="showFile(item)"
-              ><v-icon >mdi-folder</v-icon>
+            <v-btn class="primary" elevation="2" @click="showFile(item.id)"
+              ><v-icon>mdi-folder</v-icon>
               عرض
             </v-btn>
           </template>
@@ -234,9 +246,9 @@
 </template>
 
 <script>
-
 import { mapGetters } from "vuex";
 import axios from "axios";
+import Swal from "sweetalert2";
 import format from "date-fns/format";
 export default {
   name: "followUpDesion",
@@ -266,6 +278,7 @@ export default {
         { text: " الدائرة", value: "org.org_Name" },
         { text: "تعديل", value: "edit" },
         { text: "حذف", value: "dlt" },
+        { text: "الملاحظات", value: "btn" },
         { text: "تنزيل الكتاب", value: "Process_Path" },
       ],
 
@@ -287,6 +300,7 @@ export default {
         send_Reciev_Date: "",
         deci_No: "",
         user_Name: "",
+        User_Update: "",
       },
       defaultItem: {
         decisionId: "",
@@ -316,14 +330,15 @@ export default {
       decision: [],
       files: [],
       file: "",
+      error: [],
     };
   },
   computed: {
     editTitle() {
       return "تعديل";
     },
-    
- ...mapGetters(["user", "token"]),
+    ...mapGetters(["user", "token", "roles"]),
+
     deleteTitle() {
       return "حذف";
     },
@@ -348,16 +363,24 @@ export default {
   },
 
   methods: {
-    /*    addFiles(){
-      const image = e.target.files[0];
-                const reader = new FileReader();
-                reader.readAsDataURL(image);
-                reader.onload = e =>{
-                    this.Process_Path = e.target.result;
-                    console.log(this.Process_Path)
-    } */
-    /*   }, */
-    showFile(docID) {
+    singleNotification(notifyText) {
+      this.$toast.error(notifyText, {
+        position: "top-right",
+        timeout: 6000,
+        closeOnClick: false,
+        pauseOnFocusLoss: true,
+        pauseOnHover: true,
+        draggable: true,
+        draggablePercent: 0.6,
+        showCloseButtonOnHover: false,
+        hideProgressBar: false,
+        closeButton: "button",
+        icon: true,
+        rtl: true,
+      });
+    },
+
+    showFile(id) {
       // loading ...
       let loader = this.$loading.show({
         loader: "dots",
@@ -365,7 +388,11 @@ export default {
         color: "#c30734",
       });
       axios
-        .get("https://localhost:7001/Decision_Processes/" + docID)
+        .get("https://localhost:7001/Decision_Processes/" + id, {
+          headers: {
+            Authorization: "Bearer " + this.token,
+          },
+        })
         .then((response) => {
           if (response.status == 200) {
             var base64 = response.data.bookinfo.pdfBase64.trim();
@@ -387,14 +414,10 @@ export default {
         .catch((error) => {
           //---loading-overlay---
           loader.hide();
-          console.log(error);
         });
     },
     filter() {
-      console.log(this.selected);
       axios.get("" + this.selected).then((response) => {
-        console.log(response);
-
         this.item = response.data;
       });
     },
@@ -404,16 +427,16 @@ export default {
       this.editedIndex = item.id;
       this.editedItem = { ...item };
       this.dialog = true;
-      console.log(this.editedIndex);
     },
     onfileselected(event) {
-      console.log(event);
-
       this.selectedfile = event.target.files(0);
     },
 
     upload() {
-      axios.post("https://localhost:7001/Decision_Processes");
+      const headers = {
+        Authorization: "Bearer " + this.token,
+      };
+      axios.post("https://localhost:7001/Decision_Processes", { header });
     },
     deleteItem(item) {
       this.editedIndex = item.id;
@@ -428,7 +451,7 @@ export default {
           if (response.status == 204) {
             alert("تم الحذف بنجاح");
           }
-          console.log(response);
+
           this.getdata();
         });
     },
@@ -454,13 +477,9 @@ export default {
       if (this.editValue) {
         this.update();
       } else {
-        // loading ...
-        let loader = this.$loading.show({
-          container: this.$refs.saveDes,
-          loader: "bars",
-          transition: "fade",
-          color: "#c30734",
-        });
+        const headers = {
+          Authorization: "Bearer " + this.token,
+        };
         const formData = new FormData();
         formData.append("decisionId", this.editedItem.decisionId);
         formData.append("Book_TypeId", this.editedItem.book_TypeId);
@@ -473,37 +492,77 @@ export default {
         formData.append("DurationId", this.editedItem.durationId);
         formData.append("Send_Reciev_Date", this.editedItem.send_Reciev_Date);
         formData.append("deci_No", this.editedItem.deci_No);
-       // formData.append("User_Name", this.editedItem.user_Name);
+        // formData.append("User_Name", this.editedItem.user_Name);
         formData.append("User_Name", this.user.userName);
         formData.append(" Process_Path", this.editedItem.Process_Path);
         formData.append("File", this.files);
 
         await axios
-          .post("https://localhost:7001/Decision_Processes", formData)
+          .post("https://localhost:7001/Decision_Processes", formData, {
+            headers,
+          })
           .then((response) => {
             if (response.status == 200 || response.status == 201) {
-              loader.hide();
+              //  loader.hide();
+              Swal.fire({
+                icon: "success",
+                title: "تم حفظ القرار بنجاح",
+                showConfirmButton: true,
+              }).then(() => {
+                // this.$router.push("/");
+              });
               this.dialog = false;
               this.loading = false;
               this.getdata();
             }
           })
           .catch((err) => {
-            loader.hide();
-            console.log(err);
+            if (err.response.status == 400) {
+              this.singleNotification("رقم القيد مكرر !");
+            }
           });
       }
+      loader.hide();
     },
     async update() {
       this.loading = true;
+      const headers = {
+        Authorization: "Bearer " + this.token,
+      };
+      const formData = new FormData();
+      formData.append("decisionId", this.editedItem.decisionId);
+      formData.append("Book_TypeId", this.editedItem.book_TypeId);
+      formData.append("Book_No", this.editedItem.book_No);
+      formData.append("Book_Date", this.editedItem.book_Date);
+      formData.append("OrgId", this.editedItem.orgId);
+      formData.append("Process_Subj", this.editedItem.process_Subj);
+      formData.append("Process_Details", this.editedItem.process_Details);
+      formData.append("StatusId", this.editedItem.statusId);
+      formData.append("DurationId", this.editedItem.durationId);
+      formData.append("Send_Reciev_Date", this.editedItem.send_Reciev_Date);
+      formData.append("deci_No", this.editedItem.deci_No);
+      // formData.append("User_Name", this.editedItem.user_Name);
 
+      formData.append("User_Update", this.user.userName);
+      formData.append("Entry_Date", this.Entry_Date);
+
+      formData.append(" Process_Path", this.editedItem.Process_Path);
+      formData.append("File", this.files);
       await axios
         .put(
           "https://localhost:7001/Decision_Processes/" + this.editedIndex,
-          this.editedItem
+          formData,
+          { headers }
         )
+
         .then(function (response) {
-          console.log(response);
+          Swal.fire({
+            icon: "success",
+            title: "تم حفظ القرار بنجاح",
+            showConfirmButton: true,
+          }).then(() => {
+            // this.$router.push("/");
+          });
         });
       this.getdata();
       this.dialog = false;
@@ -514,43 +573,70 @@ export default {
     getdata() {
       this.loading = true;
       axios
-        .get("https://localhost:7001/Decision_Processes", {})
+        .get("https://localhost:7001/Decision_Processes", {
+          headers: {
+            Authorization: "Bearer " + this.token,
+          },
+        })
         .then((response) => {
           this.item = response.data;
           this.loading = false;
-          console.log(this.item);
         });
     },
 
     getgdata() {
-      axios.get("https://localhost:7001/BookTypes").then((response) => {
-        this.book_Type = response.data;
-      });
+      const headers = {
+        Authorization: "Bearer " + this.token,
+      };
+      axios
+        .get("https://localhost:7001/BookTypes", { headers })
+        .then((response) => {
+          this.book_Type = response.data;
+        });
     },
     Decisions() {
-      axios.get("https://localhost:7001/Decisions").then((response) => {
-        this.decision = response.data;
-      });
+      const headers = {
+        Authorization: "Bearer " + this.token,
+      };
+      axios
+        .get("https://localhost:7001/Decisions", { headers })
+        .then((response) => {
+          this.decision = response.data;
+        });
     },
 
     getgdataorg() {
-      axios.get("https://localhost:7001/Org").then((response) => {
+      const headers = {
+        Authorization: "Bearer " + this.token,
+      };
+      axios.get("https://localhost:7001/Org", { headers }).then((response) => {
         this.org = response.data;
       });
     },
     getgdatast() {
-      axios.get(" https://localhost:7001/Statuses ").then((response) => {
-        this.suttas = response.data;
-      });
+      const headers = {
+        Authorization: "Bearer " + this.token,
+      };
+      axios
+        .get(" https://localhost:7001/Statuses ", { headers })
+        .then((response) => {
+          this.suttas = response.data;
+        });
     },
     getgdatperiod() {
-      axios.get(" https://localhost:7001/Durations ").then((response) => {
-        this.period = response.data;
-      });
+      const headers = {
+        Authorization: "Bearer " + this.token,
+      };
+      axios
+        .get(" https://localhost:7001/Durations ", { headers })
+        .then((response) => {
+          this.period = response.data;
+        });
     },
   },
 
   mounted() {
+    console.log(this.user[0]);
     this.getgdata();
     this.getgdata(),
       this.getgdataorg(),
@@ -570,3 +656,22 @@ export default {
   },
 };
 </script>
+<style>
+
+  white-space: pre-line;
+  
+.fixed-width-datatable tbody tr {
+ 
+  max-width: 10px; /* Adjust the maximum height as needed */
+  overflow: hidden;
+  text-overflow: ellipsis; /* You can add ellipsis for overflow text */
+}
+
+
+</style>
+
+
+
+
+
+
