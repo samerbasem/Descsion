@@ -15,7 +15,10 @@ import FollowUpDeesion from "../views/FollowUpDeesion.vue";
 import ReportView from "../views/ReportView.vue";
 import ViewDesicion from "../views/ViewDesicion.vue";
 import Descion_Org from "../views/Descion_Org.vue";
+import Follow_Org from "../views/Follow_Org.vue";
+import follow_orgView from "../views/follow_orgView";
 import orgs from "../views/orgs.vue";
+import Report from "../views/Report.vue";
 Vue.use(VueRouter);
 
 const routes = [
@@ -32,11 +35,30 @@ const routes = [
     meta: { requiresAuth: true },
   },
   {
+    path: "/Report",
+    name: "Report",
+    component: Report,
+    meta: { requiresAuth: true },
+  },
+  {
     path: "/ViewDesicion",
     name: "ViewDesicion",
     component: ViewDesicion,
     meta: { requiresAuth: true },
-  },
+    },
+    {
+      path: "/Follow_Org",
+      name: "Follow_Org",
+      component: Follow_Org,
+      meta: { requiresAuth: true },
+    },
+    {
+      path: "/follow_orgView",
+      name: "follow_orgView",
+      component:follow_orgView,
+      meta: { requiresAuth: true },
+    },
+ 
   {
     path: "/RegistesView/:id",
     name: "RegistesView",

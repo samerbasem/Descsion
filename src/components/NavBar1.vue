@@ -26,6 +26,13 @@
       <v-btn rounded color="#9EB8D9" dark to="/ViewDesicion" style="width: 220px">عرض القرارات</v-btn>
 
       <br />
+      <v-btn
+  rounded
+  color="#9EB8D9"
+  dark
+  to="/Report"
+  style="width: 220px"
+>عرض التقرير</v-btn>
       <br />
 
       <v-btn
@@ -63,6 +70,25 @@
     style="width: 220px"  v-if="roles.find((el) => el == 'writer' || el == 'admin')"
   >اضافة الجهات المرسل اليها القرار</v-btn>
   <br />
+  <br/>
+  <v-btn
+   rounded
+   color="#9EB8D9"
+   dark
+   to="/Follow_Org"
+   style="width: 220px"  v-if="roles.find((el) => el == 'writer' || el == 'admin')"
+ >اضافة جهات الاجراءات المرسل اليها القرار</v-btn>
+ <br/>
+ <br />
+ <v-btn
+  rounded
+  color="#9EB8D9"
+  dark
+  to="/follow_orgView"
+  style="width: 220px"  v-if="roles.find((el) => el == 'writer' || el == 'admin')"
+>عرض اجراءات الكتب المرسلة للجهات </v-btn>
+<br />
+<br/>
  <br />
       <v-btn
         rounded
