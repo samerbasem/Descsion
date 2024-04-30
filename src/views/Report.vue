@@ -1,45 +1,119 @@
 <template>
     <div>
-      <div v-if="loading">Loading...</div>
-      <div v-else-if="error">Error: {{ error }}</div>
-      <div v-else>
-        <h1>{{ report.title }}</h1>
-        <p>{{ report.content }}</p>
-      </div>
+    
+        <!-- <br /><br /><br /> -->
+    
+        <!-- <v-btn rounded color="#9EB8D9" dark @click="downloadPDF()" style="width: 220px">طباعة التقرير</v-btn> -->
+        <!-- <v-btn rounded color="#9EB8D9" dark @click="download2PDF()" style="width: 220px">طباعة 2التقرير</v-btn> -->
+
+        
+    
+    
     </div>
-  </template>
-  
-  <script>
-  import axios from 'axios';
-  
-  export default {
+</template>
+
+<script>
+import { mapGetters } from "vuex";
+import axios from "axios";
+export default {
+    name: "ٌReport",
+
     data() {
-      return {
-        loading: true,
-        error: null,
-        report: null
-      };
+        return {
+         
+        };
     },
-    mounted() {
-      // Fetch report data from the Swagger API endpoint
-      this.fetchReport();
+    computed: {
+        ...mapGetters(["user", "token", "roles"])
     },
     methods: {
-      fetchReport() {
-        // Make a GET request to the Swagger API endpoint
-        axios.get('https://localhost:7001/Reports/GetReport')
-          .then(response => {
-            // Assuming successful response with report data
-            this.report = response.data;
-            this.loading = false;
-          })
-          .catch(error => {
-            // Handle error
-            this.error = error.message || 'An error occurred while fetching the report.';
-            this.loading = false;
-          });
-      }
+        
+        downloadPDF() {
+            const headers = {
+                Authorization: "Bearer " + this.token
+            };
+            // loading ...
+            let loader = this.$loading.show({
+                loader: "dots",
+                transition: "fade",
+                color: "#c30734"
+            });
+            axios
+                .get(
+                    "https://localhost:7001/Reports/GetReportWithParameter?filterValue=${filterValue}", {
+                        headers,
+                    }
+                )
+                .then(response => {
+                    if (response.status == 200) {
+                        var base64 = response.data.base64.trim();
+                        // -- check format type -------
+                        var formatType = "data:application/pdf;base64," + base64;
+                        fetch(formatType)
+                            .then(response => response.blob())
+                            .then(blob => {
+                                //---loading-overlay---
+                                loader.hide();
+                                const data = URL.createObjectURL(blob);
+                                var link = document.createElement("a");
+                                link.href = data;
+                                link.target = "_blank";
+                                link.click();
+                                window.URL.revokeObjectURL(blob);
+                              
+                            });
+                    }
+                })
+                .catch(error => {
+                    //---loading-overlay---
+                    
+                    console.log(error);
+                    loader.hide();
+                });
+        },
+        download2PDF() {
+     const headers = {
+         Authorization: "Bearer " + this.token
+     };
+     // loading ...
+     let loader = this.$loading.show({
+         loader: "dots",
+         transition: "fade",
+         color: "#c30734"
+     });
+     axios
+         .get(
+             "https://localhost:7001/GetReport", {
+                 headers,
+             }
+         )
+         .then(response => {
+             if (response.status == 200) {
+                 var base64 = response.data.base64.trim();
+                 // -- check format type -------
+                 var formatType = "data:application/pdf;base64," + base64;
+                 fetch(formatType)
+                     .then(response => response.blob())
+                     .then(blob => {
+                         //---loading-overlay---
+                         loader.hide();
+                         const data = URL.createObjectURL(blob);
+                         var link = document.createElement("a");
+                         link.href = data;
+                         link.target = "_blank";
+                         link.click();
+                         window.URL.revokeObjectURL(blob);
+                       
+                     });
+             }
+         })
+         .catch(error => {
+             //---loading-overlay---
+             
+             console.log(error);
+             loader.hide();
+         });
+ }
     }
-  };
-  </script>
-  
+};
+</script>

@@ -72,9 +72,9 @@ export default {
         })
         .then((response) => {
           if (response.status == 200 || response.status == 201) {
-            this.setUserAction(response.data.groupedRoles[0]);
-            this.setTokenAction(response.data.token);
-            this.setRolesAction(response.data.groupedRoles[0].roleName);
+            this.setUserAction(response.data.GroupedRoles[0]);
+            this.setTokenAction(response.data.Token);
+            this.setRolesAction(response.data.GroupedRoles[0].roleName);
             loader.hide();
             this.$router.push("home");
           }
