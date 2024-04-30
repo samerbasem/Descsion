@@ -26,14 +26,9 @@
       <v-btn rounded color="#9EB8D9" dark to="/ViewDesicion" style="width: 220px">عرض القرارات</v-btn>
 
       <br />
-      <v-btn
-  rounded
-  color="#9EB8D9"
-  dark
-  to="/Report"
-  style="width: 220px"
->عرض التقرير</v-btn>
       <br />
+<!--       <v-btn rounded color="#9EB8D9" dark to="/ViewDesicion1" style="width: 220px">عرض  تقرير القرارات</v-btn> -->
+
 
       <v-btn
         rounded
@@ -48,7 +43,7 @@
         rounded
         color="#9EB8D9"
         dark
-        to="/ReportView"
+        to="/Report"
         style="width: 220px"
       >تقارير اجراءات القرارات</v-btn>
       <br />
@@ -86,10 +81,10 @@
   dark
   to="/follow_orgView"
   style="width: 220px"  v-if="roles.find((el) => el == 'writer' || el == 'admin')"
->عرض اجراءات الكتب المرسلة للجهات </v-btn>
+> جراءات الكتب المرسلة للجهات </v-btn>
 <br />
 <br/>
- <br />
+
       <v-btn
         rounded
         color="#9EB8D9"
@@ -143,7 +138,7 @@
 
       <span class="mr-8">
         مرحبا
-        {{ user.userName}}
+        {{ user.UserName}}
       </span>
       <v-btn
         style="left:300px;"

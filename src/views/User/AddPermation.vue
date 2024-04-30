@@ -47,17 +47,17 @@
                
                  <v-col cols="12">
           <v-select
-            :items="users"
-            item-text="username"
-            item-value="id"
+            :items="Users"
+            item-text="Username"
+            item-value="Id"
             density="أختر اسم المستخدم"
             label="أختر اسم المستخدم"
-            v-model="userrole.userId"
+            v-model="Userrole.UserId"
           ></v-select>
         </v-col>
         <v-col cols="12">
           <v-combobox
-            v-model="userrole.roleId"
+            v-model="Userrole.RoleId"
             item-text="name"
             item-value="id"
             :items="role"
@@ -126,7 +126,8 @@
 
 <script>
 import axios from "axios";
-
+import { mapGetters } from "vuex";
+import Swal from "sweetalert2";
 export default {
   name: "advance",
  
@@ -145,29 +146,30 @@ export default {
           sortable: true,
           value: "Id",
         },
-        { text: "اسم المستخدم", value: "userName" },
-        { text: "الصلاحيات", value: "roleName" },
+        { text: "اسم المستخدم", value: "UserName" },
+        { text: "الصلاحيات", value: "RoleName" },
         { text: "تعديل", value: "edit" },
      
       ],
     
       userrole: {
-        id: "",
-        username: "",
-        userId: "",
-        roleId: "",
-        name: ""
+        Id: "",
+        Username: "",
+        UserId: "",
+        RoleId: "",
+        Name: ""
       },
 
     
       
       select: "",
       item: [],
-      users: [],
-      role: []
+      Users: [],
+      Role: []
     };
   },
   computed: {
+    ...mapGetters(["user", "token"]),
     editTitle() {
       return "تعديل";
     
@@ -216,7 +218,7 @@ export default {
     edit(item) {
       this.editValue = true;
       this.editedIndex = item.Id;
-      this.userrole = {...item};
+      this.Userrole = {...item};
       this.dialog = true;
       console.log(this.editedIndex);
     },
@@ -231,7 +233,11 @@ this.selectedfile=event.target.files(0)
     
     upload(){
 
-axios.post('https://localhost:7001/UserRole')
+axios.post('https://localhost:7001/UserRole' ,{
+  headers: {
+              Authorization: "Bearer " + this.token,
+            },
+})
 
     },
    /*  deleteItem(item) {
@@ -255,7 +261,7 @@ axios.post('https://localhost:7001/UserRole')
     close() {
       this.dialog = false;
       this.$nextTick(() => {
-        this.userrole = Object.assign({}, this.defaultItem);
+        this.Userrole = Object.assign({}, this.defaultItem);
         this.editedIndex = -1;
       });
     },
@@ -263,7 +269,7 @@ axios.post('https://localhost:7001/UserRole')
     closeDelete() {
       this.dialogDelete = false;
       this.$nextTick(() => {
-        this.userrole = Object.assign({}, this.defaultItem);
+        this.Userrole = Object.assign({}, this.defaultItem);
         this.editedIndex = -1;
       });
     },
@@ -273,11 +279,15 @@ axios.post('https://localhost:7001/UserRole')
         this.update();
       } else {   
         const formData = new FormData();
-        formData.append(" userId",this.userrole.userId)
-        formData.append(" roleId",this.userrole.roleId)
+        formData.append(" userId",this.Userrole.userId)
+        formData.append(" roleId",this.Userrole.roleId)
        
      
-        await axios.post("https://localhost:7001/UserRole", this.userrole
+        await axios.post("https://localhost:7001/UserRole" , this.Userrole,{
+          headers: {
+              Authorization: "Bearer " + this.token,
+            },
+        }
         )
         .then(function (response) {
           console.log(response);
@@ -291,7 +301,11 @@ axios.post('https://localhost:7001/UserRole')
     async update() {
       this.loading = true;
 
-      await axios.put( "https://localhost:7001/UserRole/" +this.editedIndex,this.userrole
+      await axios.put( "https://localhost:7001/UserRole/" +this.editedIndex,this.Userrole ,{
+        headers: {
+              Authorization: "Bearer " + this.token,
+            },
+      }
         )
         .then(function (response) {
           console.log(response);
@@ -303,34 +317,47 @@ axios.post('https://localhost:7001/UserRole')
     },
 
 
-
-
-    getdata() {
+  /*   getdata() {
       this.loading = true;
       axios
-        .get("https://localhost:7001/Decision_Processes", {})
+        .get("https://localhost:7001/Decision_Processes", {
+          headers: {
+              Authorization: "Bearer " + this.token,
+            },
+        })
         .then((response) => {
           this.item = response.data;
           this.loading = false;
-          console.log(this.item);
         });
       },
-     
+      */
       fetchuser() {
-      axios.get("https://localhost:7001/User").then(resuit => {
+      axios.get("https://localhost:7001/User" ,{
+        headers: {
+              Authorization: "Bearer " + this.token,
+            },
+      }).then(resuit => {
         this.users = resuit.data;
         this.loading = false;
       });
     },
     fetchrole() {
-      axios.get("https://localhost:7001/Roles").then(resuit => {
+      axios.get("https://localhost:7001/Roles" ,{
+        headers: {
+              Authorization: "Bearer " + this.token,
+            },
+      }).then(resuit => {
         this.role = resuit.data;
         this.loading = false;
         console.log(this.items);
       });
     },
     fetchuserrole() {
-      axios.get("https://localhost:7001/UserRole")
+      axios.get("https://localhost:7001/UserRole",{
+        headers: {
+              Authorization: "Bearer " + this.token,
+            },
+      })
           .then((resuit) => {
             this.item= resuit.data;
             this.loading = false;

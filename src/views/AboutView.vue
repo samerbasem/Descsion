@@ -14,7 +14,7 @@
             <v-col cols="6">
               <label>رقم الجلسة</label>
               <v-text-field
-                v-model="formdata.meet_No"
+                v-model="formdata.Meet_No"
                 solo
                 clearable
                 color="#2196F3"
@@ -25,21 +25,21 @@
               <label>نوع الجلسة</label>
               <v-select
                 :items="MeetTypes"
-                item-text="meet_Type_Name"
-                item-value="id"
-                v-model="formdata.meet_TypeId"
+                item-text="Meet_Type_Name"
+                item-value="Id"
+                v-model="formdata.Meet_TypeId"
                 solo
                 :rules="[(v) => !!v || 'يجب ادخال نوع الجلسة']"
               ></v-select>
             </v-col>
           </v-row>
 
-           <v-row justify="center">
+          <v-row justify="center">
             <v-col cols="6">
               <label>تاريخ الجلسة</label>
               <v-text-field
                 type="date"
-                v-model="formdata.meeting_Date"
+                v-model="formdata.Meeting_Date"
                 solo
                 clearable
                 color="#2196F3"
@@ -50,48 +50,48 @@
               <label>نوع الكتاب</label>
               <v-select
                 :items="Deci_Type"
-                item-text="deci_Type_Name"
-                item-value="id"
-                v-model="formdata.deci_TypeId"
+                item-text="Deci_Type_Name"
+                item-value="Id"
+                v-model="formdata.Deci_TypeId"
                 solo
                 :rules="[(v) => !!v || 'يجب ادخال نوع الكتاب']"
               ></v-select>
             </v-col>
-          </v-row> 
+          </v-row>
 
-         
           <v-row>
-            <v-col cols="4">
+            <v-col cols="6">
               <label>نوع القرار</label>
               <v-select
                 :items="DeciDirec"
-                item-text="deci_Direc_Name"
-                item-value="id"
-                v-model="formdata.deci_Direc_TypeId"
+                item-text="Deci_Direc_Name"
+                item-value="Id"
+                v-model="formdata.Deci_Direc_TypeId"
                 solo
+                @change="handleDropdownChange"
                 :rules="[(v) => !!v || 'يجب ادخال نوع الكتاب']"
               ></v-select>
             </v-col>
 
-            <v-col cols="4">
+         <!--    <v-col cols="4">
               <label>التبويب الرئيسي</label>
               <v-select
                 :items="formdata.GenCatg"
-                item-text="general_Categ_Name"
+                item-text="General_Categ_Name"
                 item-value="id"
-                v-model="formdata.general_CategId"
+                v-model="formdata.General_CategId"
                 solo
                 :rules="[(v) => !!v || 'يجب ادخال نوع التبويب الرئيسي']"
-                @change="DetailSubCatg(formdata.general_CategId)"
+                @change="DetailSubCatg(formdata.General_CategId)"
               ></v-select>
-            </v-col>
-            <v-col cols="4">
+            </v-col> -->
+            <v-col cols="6">
               <label>التبويب الفرعي</label>
               <v-select
                 :items="formdata.DetailCatg"
-                item-text="detail_Categ_Name"
-                item-value="id"
-                v-model="formdata.detail_CategId"
+                item-text="Detail_Categ_Name"
+                item-value="Id"
+                v-model="formdata.Detail_CategId"
                 solo
                 :rules="[(v) => !!v || 'يجب ادخال نوع التبويب الفرعي']"
               ></v-select>
@@ -112,7 +112,7 @@
               <label>تاريخ الكتاب</label>
               <v-text-field
                 type="date"
-                v-model="formdata.doc_Date"
+                v-model="formdata.Doc_Date"
                 solo
                 clearable
                 color="#2196F3"
@@ -124,7 +124,7 @@
             <v-col cols="6">
               <label>سنة القرار</label>
               <v-text-field
-                v-model="formdata.deci_year"
+                v-model="formdata.Deci_Year"
                 solo
                 clearable
                 color="#2196F3"
@@ -134,7 +134,8 @@
             <v-col cols="6">
               <label>رقم القرار</label>
               <v-text-field
-                v-model="formdata.deci_No"
+                v-model="formdata.Deci_No"
+                :disabled="isDisabled"      
                 solo
                 clearable
                 color="#2196F3"
@@ -142,9 +143,8 @@
               ></v-text-field>
             </v-col>
           </v-row>
-                        <!-- /******************أضافة جديدةحسب الطلب*********** */ -->
-             <v-row>
-        
+          <!-- /******************أضافة جديدةحسب الطلب*********** */ -->
+          <v-row>
             <!-- 
               <v-col cols="6">
               <label> الجهه المرسل اليها</label>
@@ -158,43 +158,41 @@
                 solo
                 :rules="[(v) => !!v || 'يجب ادخال الجهه المرسل اليها']"
               ></v-select>
-            </v-col> -->
+            </v-col>-->
             <v-col cols="6">
-            <label>موضوع القرار</label>
-            <v-textarea
-              name="input-7-1"
-              v-model="formdata.deci_Subject"
-              solo
-              auto-grow
-              box
-              single-line="false"
-              clearable
-              color="#2196F3"
-              :rules="[(v) => !!v || 'يجب ادخال موضوع القرار']"
-            ></v-textarea>
-          </v-col>
-           
+              <label>موضوع القرار</label>
+              <v-textarea
+                name="input-7-1"
+                v-model="formdata.Deci_Subject"
+                solo
+                auto-grow
+                box
+                single-line="false"
+                clearable
+                color="#2196F3"
+                :rules="[(v) => !!v || 'يجب ادخال موضوع القرار']"
+              ></v-textarea>
+            </v-col>
+
             <v-col cols="6">
-              <label> الملاحظات</label>
-            <v-textarea
-              name="input-7-1"
-              v-model="formdata.notes"
-              solo
-              auto-grow
-              box
-            
-              single-line="false"
-              clearable
-              color="#2196F3"
-              :rules="[(v) => !!v || 'يجب ادخال الملاحظات']"
-            ></v-textarea>
+              <label>الملاحظات</label>
+              <v-textarea
+                name="input-7-1"
+                v-model="formdata.Notes"
+                solo
+                auto-grow
+                box
+                single-line="false"
+                clearable
+                color="#2196F3"
+                :rules="[(v) => !!v || 'يجب ادخال الملاحظات']"
+              ></v-textarea>
             </v-col>
           </v-row>
 
-                     <!------------------------------------>
-         
+          <!------------------------------------>
 
-          <v-file-input v-model="files" label="File input" show-size></v-file-input>
+          <v-file-input v-model="Files" label="File input" show-size></v-file-input>
           <v-col cols="12">
             <v-btn
               block
@@ -217,7 +215,7 @@
     <v-footer dark padless>
       <v-card class="flex" flat tile>
         <v-card-title class="primary">
-          <strong class="subheading">Get connected with us on social networks!</strong>
+          <h3>تنفيذ _ قسم تقنية المعلومات _ شعبة هندسةالبرامجيات _ هاتف 2555 - 3005</h3>
 
           <v-spacer></v-spacer>
         </v-card-title>
@@ -236,46 +234,59 @@ export default {
   data() {
     return {
       formdata: {
-        meet_No: "",
+        Meet_No: "",
         MeetTypes: [],
-        Deci_Type:[],
-        DeciDirec:[],
-        deci_TypeId:"",
-        deci_Direc_Name:"",
-        deci_Type_Name:"",
-        Org_Name:"",
-        meet_Type_Name: "",
-        general_Categ_Name: "",
+        Deci_Type: [],
+        DeciDirec: [],
+        Deci_TypeId: "",
+        Deci_Direc_Name: "",
+        Deci_Type_Name: "",
+   
+        Meet_Type_Name: "",
+        General_Categ_Name: "",
         GenCatg: [],
         DetailCatg: [],
-        detail_Categ_Name: "",
+        Detail_Categ_Name: "",
         Doc_no: "",
-        doc_Date: "",
-        deci_year: "",
-        deci_No: "",
-        deci_Subject: "",
-        meet_TypeId: "",
-        deci_Direc_TypeId:"",
-        detail_CategId: "",
-        general_CategId: "",
-        file_Path: "",
-        notes:"",
-        meeting_Date:"",
+        Doc_Date: "",
+        Deci_Year: "",
+        Deci_No: "",
+        Deci_Subject: "",
+        Meet_TypeId: "",
+        Deci_Direc_TypeId: "",
+        Detail_CategId: "",
+        General_CategId: "",
+        File_Path: "",
+        Notes: "",
+        Meeting_Date: ""
       },
-      
-   
-         
-      files: [],
 
-      file: "",
+      Files: [],
+
+      File: "",
       error: []
     };
   },
   computed: {
     ...mapGetters(["user", "token"])
   },
+  /////////////////////////هذا خاص في عملية اختيار القرار والتوجية عمل اطفاء الانبيت/////////////////////////////
+  computed: {
+  isDisabled() {
+    console.log('Deci_Direc_TypeId:', this.formdata.Deci_Direc_TypeId);
+    const disabled = this.formdata.Deci_Direc_TypeId==2;
+    console.log('Disabled:', disabled);
+    return disabled;
+  }
+
+
+  },
   //////////////////////////////////////////////
   methods: {
+    handleDropdownChange() {
+      // You can perform additional actions here when the dropdown changes
+    },
+
     singleNotification(notifyText) {
       this.$toast.error(notifyText, {
         position: "top-right",
@@ -307,30 +318,30 @@ export default {
           Authorization: "Bearer " + this.token
         };
         const formData = new FormData();
-        formData.append("meet_No", this.formdata.meet_No);
+        formData.append("Meet_No", this.formdata.Meet_No);
         formData.append(" DeciDirec", this.formdata.DeciDirec);
-        formData.append("deci_Direc_Name", this.formdata.deci_Direc_Name);
-        formData.append("deci_TypeId", this.formdata.deci_TypeId);
+        formData.append("Deci_Direc_Name", this.formdata.Deci_Direc_Name);
+        formData.append("Deci_TypeId", this.formdata.Deci_TypeId);
         formData.append("MeetTypes", this.formdata.MeetTypes);
-        formData.append("meet_Type_Name", this.formdata.meet_Type_Name);
+        formData.append("Meet_Type_Name", this.formdata.Meet_Type_Name);
         formData.append("Deci_Type", this.formdata.Deci_Type);
-        formData.append("deci_Type_Name", this.formdata.deci_Type_Name);
-        formData.append("deci_Direc_TypeId", this.formdata.deci_Direc_TypeId);
-        formData.append("general_Categ_Name", this.formdata.general_Categ_Name);
+        formData.append("Deci_Type_Name", this.formdata.Deci_Type_Name);
+        formData.append("Deci_Direc_TypeId", this.formdata.Deci_Direc_TypeId);
+        formData.append("General_Categ_Name", this.formdata.General_Categ_Name);
         formData.append("GenCatg", this.formdata.GenCatg);
-        formData.append("detail_Categ_Name", this.formdata.detail_Categ_Name);
+        formData.append("Detail_Categ_Name", this.formdata.Detail_Categ_Name);
         formData.append("Doc_no", this.formdata.Doc_no);
-        formData.append("doc_Date", this.formdata.doc_Date);
-        formData.append("deci_year", this.formdata.deci_year);
-        formData.append("deci_No", this.formdata.deci_No);
-        formData.append("deci_Subject", this.formdata.deci_Subject);
-        formData.append("notes", this.formdata.notes);
-        formData.append("meet_TypeId", this.formdata.meet_TypeId);
-        formData.append("detail_CategId", this.formdata.detail_CategId);
-        formData.append("general_CategId", this.formdata.general_CategId);
-        formData.append(" meeting_Date", this.formdata. meeting_Date);
-        formData.append("User_Name", this.user.userName);
-        formData.append("File", this.files);
+        formData.append("Doc_Date", this.formdata.Doc_Date);
+        formData.append("Deci_Year", this.formdata.Deci_Year);
+        formData.append("Deci_No", this.formdata.Deci_No);
+        formData.append("Deci_Subject", this.formdata.Deci_Subject);
+        formData.append("Notes", this.formdata.Notes);
+        formData.append("Meet_TypeId", this.formdata.Meet_TypeId);
+        formData.append("Detail_CategId", this.formdata.Detail_CategId);
+        formData.append("General_CategId", this.formdata.General_CategId);
+        formData.append(" Meeting_Date", this.formdata.Meeting_Date);
+        /* formData.append("User_Name", this.user.User_Name); */
+        formData.append("File", this.Files);
         formData.append("DessionOrgs", this.formdata.DessionOrgs);
         axios
           .post("https://localhost:7001/Decisions", formData, {
@@ -394,14 +405,13 @@ export default {
         .then(response => {
           this.formdata.DetailCatg = response.data;
         });
-    },
-     ///////////////////////////////////////خاص في جلي الجهات التي يتم ارسال القرارلها//////////////////////////
+    }
+    ///////////////////////////////////////خاص في جلي الجهات التي يتم ارسال القرارلها//////////////////////////
     /*  getorg() {
       axios.get("https://localhost:7001/Org").then(response => {
         this.orgs = response.data;
       });
     }, */
-    
   },
 
   mounted() {
@@ -410,7 +420,6 @@ export default {
     this.DetailCatg();
     this.Deci_Type();
     this.DeciDirec();
-  },
- 
+  }
 };
 </script>

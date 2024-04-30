@@ -21,17 +21,17 @@
   <v-select
    :items="decision"
    label=" ادخل رقم القرار "
-   item-text="deci_No"
+   item-text="Deci_No"
    item-value="id"
-   v-model="Decision_Orgs.decisionId"
+   v-model="Decision_Orgs.DecisionId"
  ></v-select>
  
                      </v-col>
                      <v-select
                      :items="orgs"
-    v-model="Decision_Orgs.orgId"
+    v-model="Decision_Orgs.OrgId"
     
-    item-text="org_Name"
+    item-text="Org_Name"
    item-value="id"
     chips
     label="اختر الجهة "
@@ -80,8 +80,8 @@ import format from "date-fns/format";
         item:[ ],
         decision:{
 
-            id:"",
-            deci_No:""
+            Id:"",
+            Deci_No:""
         },
         Decision_Orgs:{
           
@@ -89,7 +89,7 @@ import format from "date-fns/format";
             
         },
         orgs:{
-            id:"",
+            Id:"",
       Org_Name:""
         },
           
@@ -100,7 +100,7 @@ import format from "date-fns/format";
    align: "center",
    sortable: false,
       
-   value: "decision.deci_No",
+   value: "Decision.Deci_No",
  },
  {
   text: "الجهة المختصة",

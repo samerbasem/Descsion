@@ -84,6 +84,9 @@
 </template>
 
 <script>
+  import Swal from "sweetalert2";
+import axios from "axios";
+import { mapGetters } from "vuex";
 export default {
  name:'RoleView',
 
@@ -110,6 +113,9 @@ export default {
         ]
     };
   },
+  computed: {
+    ...mapGetters(["user", "token"])
+  },
   mounted(){
     this.fetchData();
 
@@ -130,7 +136,11 @@ export default {
 
     
         axios
-          .post("https://localhost:7001/Roles", this.role)
+          .post("https://localhost:7001/Roles", this.role ,{
+            headers: {
+              Authorization: "Bearer " + this.token,
+            },
+          })
           .then((response) => {
             console.log(response);
           
@@ -140,7 +150,11 @@ export default {
       },
       fetchData() {
         axios
-          .get("https://localhost:7001/Roles",{} )
+          .get("https://localhost:7001/Roles",{
+            headers: {
+              Authorization: "Bearer " + this.token,
+            },
+          } )
           .then((resuit) => {
             this.item = resuit.data;
             console.log(this.item);

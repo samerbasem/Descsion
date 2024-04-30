@@ -71,10 +71,11 @@ export default {
           password: this.login.password,
         })
         .then((response) => {
+          console.log('qqqqq')
           if (response.status == 200 || response.status == 201) {
             this.setUserAction(response.data.GroupedRoles[0]);
             this.setTokenAction(response.data.Token);
-            this.setRolesAction(response.data.GroupedRoles[0].roleName);
+            this.setRolesAction(response.data.GroupedRoles[0].RoleName);
             loader.hide();
             this.$router.push("home");
           }

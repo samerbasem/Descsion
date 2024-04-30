@@ -1,10 +1,10 @@
 <template>
     <div>
     
-        <!-- <br /><br /><br /> -->
+        
     
-        <!-- <v-btn rounded color="#9EB8D9" dark @click="downloadPDF()" style="width: 220px">طباعة التقرير</v-btn> -->
-        <!-- <v-btn rounded color="#9EB8D9" dark @click="download2PDF()" style="width: 220px">طباعة 2التقرير</v-btn> -->
+         <v-btn rounded color="red" dark @click="downloadPDF()" style="width: 220px">طباعة التقرير</v-btn> -->
+         <v-btn rounded color="#9EB8D9" dark @click="download2PDF()" style="width: 220px">طباعة 2التقرير</v-btn> -->
 
         
     
@@ -40,7 +40,7 @@ export default {
             });
             axios
                 .get(
-                    "https://localhost:7001/Reports/GetReportWithParameter?filterValue=${filterValue}", {
+                    "https://localhost:7001/Reports/GetReportWithParameter", {
                         headers,
                     }
                 )

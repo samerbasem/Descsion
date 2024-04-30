@@ -20,7 +20,7 @@
   
           <v-data-table
             :headers="headers"
-            :items="data"
+            :items="Data"
             elevation="24"
             :loading="false"
             :items-per-page="10"
@@ -43,9 +43,9 @@
       return {
         formdata: {
             Proc_Orgs: [],
-          id: null,
-          book_No:"",
-          org: [],
+          Id: null,
+          Book_No:"",
+          Org: [],
           Decision_Processes: [],
   
          
@@ -58,21 +58,21 @@
             text: "رقم الكتاب",
             align: "center",
             sortable: false,
-            value: "book_No"
+            value: "Book_No"
           },
   
           {
             text: "الجهة",
             align: "center",
             sortable: false,
-            value: "orgName"
+            value: "OrgName"
           },
   
           {
             text: "تاريخ الارسال",
             align: "center",
             sortable: false,
-            value: "send_Date"
+            value: "Send_Date"
           }
         ],
         data: []
@@ -83,6 +83,11 @@
       this.fetchData();
       this.searchRole();
     },
+    created(){
+
+      this.fetchData();
+   this.searchRole();
+    },
     methods: {
    
    
@@ -91,32 +96,14 @@
    
    
    
-   
-   
-   
-   
-   
 
 
 
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
-   
+
+
+
+
+  
   
       searchRole() {
   
@@ -125,7 +112,7 @@
        Authorization: "Bearer " + this.token,
      };
         this.axios
-          .get("https://localhost:7001/Decision_Processes/" + this.book_No,{headers})
+          .get("https://localhost:7001/Decision_Processes/" + this.Book_No,{headers})
           .then(resuit => {
             this.data = resuit.data;
             console.log(resuit);

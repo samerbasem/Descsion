@@ -18,15 +18,6 @@ Vue.use(Toast, {
   maxToasts: 20,
   newestOnTop: true,
 });
-
-
-
-
-
-
-
-
-
 new Vue({
   vuetify,
   store,

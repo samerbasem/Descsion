@@ -12,13 +12,14 @@ import AddPermation from "../views/User/AddPermation";
 import EditView from "../views/EditView.vue";
 import ShowDecision from "../views/ShowDecision.vue";
 import FollowUpDeesion from "../views/FollowUpDeesion.vue";
-import ReportView from "../views/ReportView.vue";
+import Report from "../views/Report.vue";
 import ViewDesicion from "../views/ViewDesicion.vue";
+import ViewDesicion1 from "../views/ViewDesicion1.vue";
 import Descion_Org from "../views/Descion_Org.vue";
 import Follow_Org from "../views/Follow_Org.vue";
-import follow_orgView from "../views/follow_orgView";
+import follow_orgView from "../views/follow_orgView.vue";
 import orgs from "../views/orgs.vue";
-import Report from "../views/Report.vue";
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -35,17 +36,17 @@ const routes = [
     meta: { requiresAuth: true },
   },
   {
-    path: "/Report",
-    name: "Report",
-    component: Report,
-    meta: { requiresAuth: true },
-  },
-  {
     path: "/ViewDesicion",
     name: "ViewDesicion",
     component: ViewDesicion,
     meta: { requiresAuth: true },
     },
+    {
+      path: "/ViewDesicion1",
+      name: "ViewDesicion1",
+      component: ViewDesicion1,
+      meta: { requiresAuth: true },
+      },
     {
       path: "/Follow_Org",
       name: "Follow_Org",
@@ -78,9 +79,9 @@ const routes = [
     meta: { requiresAuth: true },
   },
   {
-    path: "/ReportView",
-    name: "ReportView",
-    component: ReportView,
+    path: "/Report",
+    name: "Report",
+    component: Report,
     meta: { requiresAuth: true },
   },
   {
@@ -96,7 +97,7 @@ const routes = [
     meta: { requiresAuth: true },
   },
   {
-    path: "/EditView/:id",
+    path: "/EditView/:Id",
     name: "EditView",
     component: EditView,
     meta: { requiresAuth: true },

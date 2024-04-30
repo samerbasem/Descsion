@@ -12,8 +12,8 @@
           <div class="slider--container">
             <img class="slider--image" src="@/assets/img999.jpg" alt="winter-01" />
             <img class="slider--image" src="@/assets/img999.jpg" alt="winter-02" />
-            <img class="slider--image" src="@/assets/img999.jpg" alt="winter-03" />
-            <img class="slider--image" src="@/assets/img999.jpg" alt="winter-04" />
+            <img class="slider--image" src="@/assets/img106.jpg" alt="winter-03" />
+            <img class="slider--image" src="@/assets/img2024.jpg" alt="winter-04" />
           </div>
           
           
@@ -52,9 +52,9 @@
             </article>
             </v-card>
         </v-col>
-       
-        
-          <v-col cols="2"  >
+           
+         
+          <v-col cols="2"   >
            
           <v-card class="pa-31" elevation="10" color="#EEF5FF">
          
@@ -254,7 +254,7 @@
 <script>
 import { mapGetters } from "vuex";
 export default {
-  name: "HomeView",
+  name: "home",
 
   computed: {
     ...mapGetters(["user", "token", "roles"])
@@ -314,7 +314,7 @@ h3 {
 .slider--heading {
   position: absolute;
   top: 50%;
-  left: 50%;
+  left: 60%;
   padding: 3rem;
   z-index: 70;
   font: 200 1.25rem/1.25 Verdana, sans-serif;
@@ -374,10 +374,10 @@ h3 {
 .slider--image {
   position: absolute;
   
-  height: 300%;
+  height:100%;
   width: 100%;
   object-fit: cover;
-  animation: 40s ease-in-out infinite;
+  animation: 25s ease-in-out infinite;
 }
 .slider--image:hover svg {
   filter: drop-shadow(2px -9px 4px rgba(37, 242, 14, 0.4));
@@ -626,131 +626,19 @@ h3 {
     transform: scale(1.4) translate(0, 0);
   }
 }
-/************************************************************************* */
-
-@-webkit-keyframes slide-05 {
-  0% {
-    opacity: 0;
-  }
-  16% {
-    opacity: 0;
-    -webkit-transform: scale(1.2) translate(-20px, -10px);
-  }
-  33% {
-    opacity: 1;
-    -webkit-transform: scale(1.4) translate(0, 0);
-  }
-  50% {
-    opacity: 1;
-    -webkit-transform: scale(1.2) translate(-20px, 10px);
-  }
-  67% {
-    opacity: 0;
-    -webkit-transform: scale(1.4) translate(0, 0);
-  }
-  84% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-@-webkit-keyframes slide-06 {
-  0% {
-    opacity: 0;
-  }
-  16% {
-    opacity: 0;
-  }
-  33% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 0;
-    -webkit-transform: scale(1.4) translate(0, 0);
-  }
-  67% {
-    opacity: 1;
-    -webkit-transform: scale(1.4) translate(-20px, 10px);
-  }
-  84% {
-    opacity: 1;
-    -webkit-transform: scale(1.2) translate(20px, -10px);
-  }
-  100% {
-    opacity: 0;
-    -webkit-transform: scale(1.4) translate(0, 0);
-  }
-}
-
-/* Styles for all other browsers */
-
-@keyframes slide-05 {
-  0% {
-    opacity: 0;
-  }
-  16% {
-    opacity: 0;
-    transform: scale(1.2) translate(-20px, -10px);
-  }
-  33% {
-    opacity: 1;
-    transform: scale(1.4) translate(0, 0);
-  }
-  50% {
-    opacity: 1;
-    transform: scale(1.2) translate(-20px, 10px);
-  }
-  67% {
-    opacity: 0;
-    transform: scale(1.4) translate(0, 0);
-  }
-  84% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-@keyframes slide-06 {
-  0% {
-    opacity: 0;
-  }
-  16% {
-    opacity: 0;
-  }
-  33% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 0;
-    transform: scale(1.4) translate(0, 0);
-  }
-  67% {
-    opacity: 1;
-    transform: scale(1.4) translate(-20px, 10px);
-  }
-  84% {
-    opacity: 1;
-    transform: scale(1.2) translate(20px, -10px);
-  }
-  100% {
-    opacity: 0;
-    transform: scale(1.4) translate(0, 0);
-  }
-}
 
 /* المواقع التي تهمك */
 .card {
   position: relative;
   padding: 0;
   margin: 0 !important;
-  border-radius: 50px;
+  
+  border-radius: 20px;
   overflow: hidden;
   max-width: 600px;
   max-height: 800px;
   cursor: pointer;
-  border: none;
+
   box-shadow: 0 5px 15px rgba(245, 9, 9, 0.2);
 }
 

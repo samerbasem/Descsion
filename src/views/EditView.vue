@@ -13,7 +13,7 @@
           <v-col cols="6">
             <label>رقم الجلسة</label>
             <v-text-field
-              v-model="fields.meet_No"
+              v-model="fields.Meet_No"
               solo
               label="رقم الجلسة"
               clearable
@@ -25,33 +25,62 @@
             <v-select
               :items="fields.MeetTypes"
               label="نوع الجلسة"
-              item-text="meet_Type_Name"
-              item-value="id"
-              v-model="fields.meet_TypeId"
+              item-text="Meet_Type_Name"
+              item-value="Id"
+              v-model="fields.Meet_TypeId"
               solo
             ></v-select>
           </v-col>
         </v-row>
+
+        <v-row justify="center">
+          <v-col cols="6">
+            <label>تاريخ الجلسة</label>
+            <v-text-field type="text" v-model="fields.Meeting_Date" solo clearable color="#2196F3"></v-text-field>
+          </v-col>
+
+          <v-col cols="6">
+            <label>نوع الكتاب</label>
+            <v-select
+              :items="fields.Deci_Type"
+              item-text="Deci_Type_Name"
+              item-value="Id"
+              v-model="fields.Deci_TypeId"
+              solo
+            ></v-select>
+          </v-col>
+        </v-row>
+
         <v-row>
           <v-col cols="6">
+            <label>توجية اجراء</label>
+            <v-select
+              :items="fields.DeciDirec"
+              item-text="Deci_Direc_Name"
+              item-value="Id"
+              v-model="fields.Deci_Direc_TypeId"
+              solo
+            ></v-select>
+          </v-col>
+          <!-- <v-col cols="4">
             <label>التبويب الرئيسي</label>
             <v-select
               :items="fields.GenCatg"
               label="التبويب الرئيسي"
-              item-text="general_Categ_Name"
-              item-value="id"
-              v-model="fields.general_CategId"
+              item-text="General_Categ_Name"
+              item-value="Id"
+              v-model="fields.General_CategId"
               solo
             ></v-select>
-          </v-col>
+          </v-col> -->
           <v-col cols="6">
             <label>التبويب الفرعي</label>
             <v-select
               :items="fields.DetailCatg"
               label="التبويب الفرعي"
-              item-text="detail_Categ_Name"
-              item-value="id"
-              v-model="fields.detail_CategId"
+              item-text="Detail_Categ_Name"
+              item-value="Id"
+              v-model="fields.Detail_CategId"
               solo
             ></v-select>
           </v-col>
@@ -71,7 +100,7 @@
             <label>تاريخ الكتاب</label>
             <v-text-field
               type="text"
-              v-model="fields.doc_Date"
+              v-model="fields.Doc_Date"
               solo
               label=" تاريخ  الكتاب"
               clearable
@@ -93,7 +122,7 @@
           <v-col cols="6">
             <label>رقم القرار</label>
             <v-text-field
-              v-model="fields.deci_No"
+              v-model="fields.Deci_No"
               solo
               label=" رقم القرار"
               clearable
@@ -101,43 +130,40 @@
             ></v-text-field>
           </v-col>
         </v-row>
-        <v-col
-        cols="6"
-        md="6"
-      >
-        <label>موضوع القرار</label>
-        <v-textarea
-        v-model="fields.deci_Subject"
-          solo
-          single-line="false"
-          label=" موضوع القرار"
+
+        <v-row>
+          <v-col cols="6">
+            <label>موضوع القرار</label>
+            <v-textarea
+              v-model="fields.Deci_Subject"
+              solo
+              auto-grow
+              box
+              single-line="false"
               clearable
               color="#2196F3"
-             
-              filled
-          auto-grow
-       
-          rows="1"
-          row-height="30"
-          shaped
-          name="input-7-4"
-          
-        ></v-textarea>
+              name="input-7-1"
+            ></v-textarea>
+          </v-col>
+          <v-col cols="6">
+            <label>الملاحظات</label>
+            <v-textarea
+              v-model="fields.Notes"
+              solo
+              auto-grow
+              box
+              single-line="false"
+              clearable
+              color="#2196F3"
+              name="input-7-1"
+            ></v-textarea>
+          </v-col>
+        </v-row>
 
-        </v-col>
-        <!-- <v-col cols="12">
-          <label>موضوع القرار</label>
-          <v-text-field
-            v-model="fields.deci_Subject"
-            solo
-            label=" موضوع القرار"
-            clearable
-            color="#2196F3"
-          ></v-text-field>
-        </v-col> -->
+        <v-file-input v-model="File" label="File input" show-size></v-file-input>
         <v-col cols="12">
           <h4>
-            <a href="#" @click="showDoc(fields.deci_No)">عرض المستند</a>
+            <a href="#" @click="showDoc(fields.Id)">عرض المستند</a>
           </h4>
         </v-col>
       </v-card-subtitle>
@@ -182,33 +208,41 @@ export default {
   data() {
     return {
       fields: {
-        meet_No: null,
+        Meet_No: null,
         MeetTypes: [],
-        id: null,
-        meet_Type_Name: null,
-        general_Categ_Name: null,
+        Deci_Type: [],
+        DeciDirec: [],
+        Deci_TypeId: "",
+        Deci_Direc_TypeId: "",
+        Deci_Direc_Name: "",
+        Deci_Type_Name: "",
+        Id: null,
+        Meet_Type_Name: null,
+        General_Categ_Name: null,
         GenCatg: [],
         DetailCatg: [],
-        detail_Categ_Name: null,
+        Detail_Categ_Name: null,
         Doc_no: null,
-        doc_Date: null,
+        Doc_Date: null,
         Deci_Year: null,
-        deci_No: null,
-        deci_Subject: null,
-        meet_TypeId: null,
-        detail_CategId: null,
-        general_CategId: null,
-        File: null,
-        user_Update:"",
-      
-      }
+        Deci_No: null,
+        Deci_Subject: null,
+        Meet_TypeId: null,
+        Detail_CategId: null,
+        General_CategId: null,
+        User_Update: "",
+        File_Path: "",
+        Notes: "",
+        Meeting_Date: ""
+      },
+      File: null
     };
   },
   computed: {
     ...mapGetters(["user", "token"])
   },
   methods: {
-    showDoc(id) {
+    showDoc(Id) {
       // loading ...
       let loader = this.$loading.show({
         loader: "dots",
@@ -216,7 +250,11 @@ export default {
         color: "#c30734"
       });
       axios
-        .get("https://localhost:7001/Decisions/" + id)
+        .get("https://localhost:7001/Decisions/" + Id, {
+          headers: {
+            Authorization: "Bearer " + this.token
+          }
+        })
         .then(response => {
           if (response.status == 200) {
             var base64 = response.data.bookinfo.pdfBase64.trim();
@@ -249,26 +287,38 @@ export default {
         color: "#c30734"
       });
       var formData = new FormData();
-      formData.append("meet_No", this.fields.meet_No);
+      formData.append("Meet_No", this.fields.Meet_No);
       formData.append("MeetTypes", this.fields.MeetTypes);
-      formData.append("meet_Type_Name", this.fields.meet_Type_Name);
-      formData.append("general_Categ_Name", this.fields.general_Categ_Name);
+      formData.append("Deci_Type", this.fields.Deci_Type);
+      formData.append("Deci_Type_Name", this.fields.Deci_Type_Name);
+      formData.append("Deci_TypeId", this.fields.Deci_TypeId);
+      formData.append("DeciDirec", this.fields.DeciDirec);
+      formData.append("Deci_Direc_Name", this.fields.Deci_Direc_Name);
+      formData.append("Deci_Direc_TypeId", this.fields.Deci_Direc_TypeId);
+      formData.append("Meeting_Date", this.fields.Meeting_Date);
+      formData.append("Meet_Type_Name", this.fields.Meet_Type_Name);
+      // formData.append("General_Categ_Name", this.fields.General_Categ_Name);
       formData.append("GenCatg", this.fields.GenCatg);
-      formData.append("detail_Categ_Name", this.fields.detail_Categ_Name);
+      formData.append("Detail_Categ_Name", this.fields.Detail_Categ_Name);
       formData.append("Doc_no", this.fields.Doc_no);
-      formData.append("doc_Date", this.fields.doc_Date);
+      formData.append("Doc_Date", this.fields.Doc_Date);
       formData.append("deci_year", this.fields.Deci_Year);
-      formData.append("deci_No", this.fields.deci_No);
-      formData.append("deci_Subject", this.fields.deci_Subject);
-      formData.append("meet_TypeId", this.fields.meet_TypeId);
-      formData.append("detail_CategId", this.fields.detail_CategId);
-      formData.append("general_CategId", this.fields.general_CategId);
-      formData.append("user_Update", this.user.userName);
-     
-      
-      formData.append("File", this.fields.File);
+      formData.append("Deci_No", this.fields.Deci_No);
+      formData.append("Deci_Subject", this.fields.Deci_Subject);
+      formData.append("Notes", this.fields.Notes);
+      formData.append("Meet_TypeId", this.fields.Meet_TypeId);
+      formData.append("Detail_CategId", this.fields.Detail_CategId);
+      formData.append("General_CategId", this.fields.General_CategId);
+      formData.append(" File_Path", this.fields.File_Path);
+      formData.append("User_Update", this.user.userName);
+
+      formData.append("File", this.File);
       axios
-        .put("https://localhost:7001/Decisions/" + this.id, formData)
+        .put("https://localhost:7001/Decisions/" + this.Id, formData, {
+          headers: {
+            Authorization: "Bearer " + this.token
+          }
+        })
         .then(response => {
           if (response.status == 200) {
             loader.hide();
@@ -279,7 +329,6 @@ export default {
             }).then(() => {
               this.$router.push("/ViewDesicion");
             });
-           
           }
         })
         .catch(error => {
@@ -287,45 +336,106 @@ export default {
           console.log(error);
         });
     },
+    Deci_TypeList() {
+      axios
+        .get("https://localhost:7001/Deci_Type", {
+          headers: {
+            Authorization: "Bearer " + this.token
+          }
+        })
+        .then(response => {
+          this.fields.Deci_Type = response.data;
+        });
+    },
+    /////////////////////////////////////////////////////
+    DeciDirecList() {
+      axios
+        .get("https://localhost:7001/DeciDirec", {
+          headers: {
+            Authorization: "Bearer " + this.token
+          }
+        })
+        .then(response => {
+          this.fields.DeciDirec = response.data;
+        });
+    },
     /////////////////////////// ///////////////////////
     MeetTypesList() {
-      axios.get("https://localhost:7001/MeetTypes").then(response => {
-        this.fields.MeetTypes = response.data;
-      });
+      axios
+        .get("https://localhost:7001/MeetTypes", {
+          headers: {
+            Authorization: "Bearer " + this.token
+          }
+        })
+        .then(response => {
+          this.fields.MeetTypes = response.data;
+        });
     },
     //////////////////////////////////////////////////////////////
     GenCatgList() {
-      axios.get("https://localhost:7001/GenCatg").then(response => {
-        this.fields.GenCatg = response.data;
-      });
+      axios
+        .get("https://localhost:7001/GenCatg", {
+          headers: {
+            Authorization: "Bearer " + this.token
+          }
+        })
+        .then(response => {
+          this.fields.GenCatg = response.data;
+        });
     },
     ///////////////////////////////////////////////////////
     DetailCatgList() {
-      axios.get("https://localhost:7001/DetailCatg").then(response => {
-        this.fields.DetailCatg = response.data;
-      });
+      axios
+        .get("https://localhost:7001/DetailCatg", {
+          headers: {
+            Authorization: "Bearer " + this.token
+          }
+        })
+        .then(response => {
+          this.fields.DetailCatg = response.data;
+        });
     },
 
     getData() {
       axios
-        .get("https://localhost:7001/Decisions/" + this.id)
+        .get("https://localhost:7001/Decisions/" + this.Id, {
+          headers: {
+            Authorization: "Bearer " + this.token
+          }
+        })
         .then(response => {
-          if (response.status == 200 || response.status == 201) {
-            this.fields.meet_No = response.data.bookinfo.deciDto1.meet_No;
-            this.fields.meet_TypeId =
-              response.data.bookinfo.deciDto1.meet_TypeId;
-            this.fields.general_CategId =
-              response.data.bookinfo.deciDto1.general_CategId;
-            this.fields.detail_CategId =
-              response.data.bookinfo.deciDto1.detail_CategId;
+          if (response.status == 200) {
+            console.log(response.data.Bookinfo.deciDto1)
+            this.fields.Meet_No = response.data.Bookinfo.deciDto1.Meet_No;
+            this.fields.Meet_TypeId = response.data.Bookinfo.deciDto1.Meet_TypeId;
+                                         
+           // this.fields.General_CategId = response.data.Bookinfo.deciDto1.General_CategId;
+          
+            this.fields.Detail_CategId = response.data.Bookinfo.deciDto1.Detail_CategId;
+             
             this.fields.Doc_no = parseInt(
-              response.data.bookinfo.deciDto1.doc_no
+              response.data.Bookinfo.deciDto1.Doc_no
             );
-            this.fields.doc_Date = response.data.bookinfo.deciDto1.doc_Date;
-            this.fields.Deci_Year = response.data.bookinfo.deciDto1.deci_Year;
-            this.fields.deci_No = response.data.bookinfo.deciDto1.deci_No;
-            this.fields.deci_Subject =
-              response.data.bookinfo.deciDto1.deci_Subject;
+            this.fields.Doc_Date = response.data.Bookinfo.deciDto1.Doc_Date;
+            this.fields.Deci_Year = response.data.Bookinfo.deciDto1.Deci_Year;
+            this.fields.Deci_No = response.data.Bookinfo.deciDto1.Deci_No;
+            this.fields.File_Path = response.data.Bookinfo.deciDto1.File_Path;
+
+            this.fields.Deci_Type = response.data.Bookinfo.deciDto1.Deci_Type;
+            this.fields.Deci_Type_Name = response.data.Bookinfo.deciDto1.Deci_Type_Name;
+           
+            this.fields.Deci_TypeId = response.data.Bookinfo.deciDto1.Deci_TypeId;
+              
+            this.fields.Deci_Subject = response.data.Bookinfo.deciDto1.Deci_Subject;
+              
+            this.fields.Notes = response.data.Bookinfo.deciDto1.Notes;
+            this.fields.DeciDirec = response.data.Bookinfo.deciDto1.DeciDirec;
+            this.fields.Deci_Direc_TypeId = response.data.Bookinfo.deciDto1.Deci_Direc_TypeId;
+             
+            this.fields.Deci_Direc_Name = response.data.Bookinfo.deciDto1.Deci_Direc_Name;
+             
+            this.fields.Meeting_Date = response.data.Bookinfo.deciDto1.Meeting_Date;
+             
           }
 
           //here you must set values to v mode of each one
@@ -334,11 +444,13 @@ export default {
   },
 
   mounted() {
-    this.id = this.$route.params.id;
+    this.Id = this.$route.params.Id;
     this.getData();
     this.MeetTypesList();
-    this.GenCatgList();
+   //  this.GenCatgList();
     this.DetailCatgList();
+    this.DeciDirecList();
+    this.Deci_TypeList();
   }
 };
 </script>

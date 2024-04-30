@@ -12,7 +12,7 @@
         <div id="test-print">
           <v-row style="direction: ltr;">
             <v-col class="d-flex align-center" cols="6" sm="4">
-           <!--    <v-btn
+              <v-btn
                 class="text-white flex-grow-1 text-none"
                 color="blue-lighten-5"
                 rounded
@@ -21,16 +21,6 @@
                 @click="printContent()"
               >
                 <span class="material-icons blue-color">print</span>
-              </v-btn> -->
-              <v-btn
-                class="text-white flex-grow-1 text-none"
-                color="blue-lighten-5"
-                rounded
-                size="x-large"
-                elevation="24"
-                to="/ViewDesicion1"
-              >
-                <span class="material-icons blue-color">عرض التقرير قبل الطباعة</span>
               </v-btn>
             </v-col>
           </v-row>
@@ -76,7 +66,7 @@
                   v-if="
            roles.find((el) => el == 'writer' || el == 'admin')
          "
-                  :to="`EditView/${item.Id}`"
+                  :to="`EditView/${item.deci_No}`"
                   color="success"
                   rounded
                   elevation="24"
@@ -98,7 +88,7 @@
                 </v-btn>
                 <br />
                 <br />
-                <v-btn class="primary" rounded elevation="24" @click="showFile(item.Deci_No)">
+                <v-btn class="primary" rounded elevation="24" @click="showFile(item.deci_No)">
                   <v-icon>mdi-folder</v-icon>الملف
                 </v-btn>
               </div>
@@ -174,17 +164,12 @@ export default {
           sortable: false,
           value: "Meet_Type.Meet_Type_Name"
         },
-        {
-          text: "تاريخ الجلسة",
-          align: "center",
-          sortable: false,
-          value: "Meeting_Date"
-        },
+     
           {
           text: "نوع الكتاب",
           align: "center",
           sortable: false,
-          value: "Deci_Type.Deci_Type_Name",class: "blue lighten-3 text-h3"
+          value: "Deci_Type.Deci_Type_Name",
 
         },
         {
@@ -227,20 +212,9 @@ export default {
 
 
         }, 
-    /*
-        {
-          text: "التبويب الرئيسي",
-          align: "center",
-          sortable: false,
-          value: "General_Categ.General_Categ_Name"
-        },
-        */
-        {
-          text: "التبويب الفرعي",
-          align: "center",
-          sortable: false,
-          value: "Detail_Categ.Detail_Categ_Name" //////////////////////عملية اظهار الاسم الموجود في التبويب الفرعي من خلال فصل الاسم الاول من الثاني////////////////
-        },
+
+       
+      
         /*
         {
           text: "المستخدم",
@@ -248,22 +222,14 @@ export default {
           value: "user_Name",
         },*/
 
-        {
-          text: "اسم المستخدم",
-          align: "center",
-          value: "User_Name"
-        },
+     
         {
           text: "الملاحظات",
           align: "center",
           sortable: false,
           value: "Notes"
         },
-        {
-          text: "العمليات",
-          align: "center",
-          value: "actions"
-        }
+      
       ],
       data: []
     };

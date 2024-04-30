@@ -3,7 +3,7 @@
     <v-card
       class="mx-auto"
       max-width="800"
-      style="margin-top: 300px"
+      style="margin-top: 100px"
       elevation="24"
     >
       <v-img src="@/assets/img106.jpg" height="300px" cover></v-img>
@@ -15,16 +15,16 @@
             <v-select
               :items="decision"
               label=" ادخل رقم الكتاب "
-              item-text="book_No"
-              item-value="id"
+              item-text="Book_No"
+              item-value="Id"
               v-model="Proc_Orgs.Decision_ProcessesId"
             ></v-select>
           </v-col>
           <v-select
             :items="orgs"
             v-model="Proc_Orgs.orgId"
-            item-text="org_Name"
-            item-value="id"
+            item-text="Org_Name"
+            item-value="Id"
             chips
             label="اختر الجهة "
             multiple
